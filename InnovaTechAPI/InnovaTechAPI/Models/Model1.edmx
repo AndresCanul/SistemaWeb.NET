@@ -1,0 +1,642 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="InnovaTechDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <Function Name="ActualizarCategoria" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdCategoria" Type="bigint" Mode="In" />
+          <Parameter Name="NombreCategoria" Type="varchar" Mode="In" />
+          <Parameter Name="DescripcionCategoria" Type="varchar" Mode="In" />
+          <Parameter Name="IconoCategoria" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="ActualizarImagenProducto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdProducto" Type="bigint" Mode="In" />
+          <Parameter Name="ImagenProducto" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="ActualizarImagenRol" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdRol" Type="bigint" Mode="In" />
+          <Parameter Name="ImagenRol" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="ActualizarImagenUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdUsuario" Type="bigint" Mode="In" />
+          <Parameter Name="ImagenUsuario" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="ActualizarInventario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdInventario" Type="bigint" Mode="In" />
+          <Parameter Name="Incrementar" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="ActualizarPerfil" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdUsuario" Type="bigint" Mode="In" />
+          <Parameter Name="IdUbicacion" Type="bigint" Mode="In" />
+          <Parameter Name="NombreUsuario" Type="varchar" Mode="In" />
+          <Parameter Name="ApellidoUsuario" Type="varchar" Mode="In" />
+          <Parameter Name="Edad" Type="int" Mode="In" />
+          <Parameter Name="Correo" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="ActualizarProducto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdProducto" Type="bigint" Mode="In" />
+          <Parameter Name="IdCategoria" Type="bigint" Mode="In" />
+          <Parameter Name="NombreProducto" Type="varchar" Mode="In" />
+          <Parameter Name="PrecioUnitario" Type="decimal" Mode="In" />
+          <Parameter Name="Color" Type="varchar" Mode="In" />
+          <Parameter Name="Stock" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ActualizarRol" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdRol" Type="bigint" Mode="In" />
+          <Parameter Name="NombreRol" Type="varchar" Mode="In" />
+          <Parameter Name="DescripcionRol" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="ActualizarUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdUsuario" Type="bigint" Mode="In" />
+          <Parameter Name="IdUbicacion" Type="bigint" Mode="In" />
+          <Parameter Name="IdRol" Type="bigint" Mode="In" />
+          <Parameter Name="NombreUsuario" Type="varchar" Mode="In" />
+          <Parameter Name="ApellidoUsuario" Type="varchar" Mode="In" />
+          <Parameter Name="Edad" Type="int" Mode="In" />
+          <Parameter Name="Correo" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="AgregarFavorito" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdUsuario" Type="bigint" Mode="In" />
+          <Parameter Name="IdProducto" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="CambiarClave" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdUsuario" Type="bigint" Mode="In" />
+          <Parameter Name="ClaveAnterior" Type="varchar" Mode="In" />
+          <Parameter Name="ClaveNueva" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="ConsultarCategoria" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdCategoria" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="ConsultarCategorias" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MostrarTodos" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="ConsultarFavoritos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdUsuario" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="ConsultarProducto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdProducto" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="ConsultarProductos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MostrarTodos" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="ConsultarRol" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdRol" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="ConsultarRoles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MostrarTodos" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="ConsultarUbicaciones" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="ConsultarUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdUsuario" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="ConsultarUsuarios" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="CrearCategoria" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NombreCategoria" Type="varchar" Mode="In" />
+          <Parameter Name="DescripcionCategoria" Type="varchar" Mode="In" />
+          <Parameter Name="IconoCategoria" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="CrearRol" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NombreRol" Type="varchar" Mode="In" />
+          <Parameter Name="DescripcionRol" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="EliminarCategoria" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdCategoria" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="EliminarFavorito" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdUsuario" Type="bigint" Mode="In" />
+          <Parameter Name="IdProducto" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="EliminarProducto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdProducto" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="EliminarRol" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdRol" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="EliminarUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdUsuario" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="GenerarClave" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Correo" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="IniciarSesionUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Correo" Type="varchar" Mode="In" />
+          <Parameter Name="Clave" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="RegistrarError" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CodigoError" Type="int" Mode="In" />
+          <Parameter Name="MensajeError" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="RegistrarProducto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdCategoria" Type="bigint" Mode="In" />
+          <Parameter Name="NombreProducto" Type="varchar" Mode="In" />
+          <Parameter Name="PrecioUnitario" Type="decimal" Mode="In" />
+          <Parameter Name="Color" Type="varchar" Mode="In" />
+          <Parameter Name="Stock" Type="int" Mode="In" />
+        </Function>
+        <Function Name="RegistrarUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdUbicacion" Type="bigint" Mode="In" />
+          <Parameter Name="NombreUsuario" Type="varchar" Mode="In" />
+          <Parameter Name="ApellidoUsuario" Type="varchar" Mode="In" />
+          <Parameter Name="Edad" Type="int" Mode="In" />
+          <Parameter Name="Correo" Type="varchar" Mode="In" />
+          <Parameter Name="Clave" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="VisualizarPerfil" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdUsuario" Type="bigint" Mode="In" />
+        </Function>
+        <EntityContainer Name="InnovaTechDBModelStoreContainer" />
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="InnovaTechDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="InnovaTechDBEntities" annotation:LazyLoadingEnabled="true" >
+          <FunctionImport Name="ActualizarCategoria">
+            <Parameter Name="IdCategoria" Mode="In" Type="Int64" />
+            <Parameter Name="NombreCategoria" Mode="In" Type="String" />
+            <Parameter Name="DescripcionCategoria" Mode="In" Type="String" />
+            <Parameter Name="IconoCategoria" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ActualizarImagenProducto">
+            <Parameter Name="IdProducto" Mode="In" Type="Int64" />
+            <Parameter Name="ImagenProducto" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ActualizarImagenRol">
+            <Parameter Name="IdRol" Mode="In" Type="Int64" />
+            <Parameter Name="ImagenRol" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ActualizarImagenUsuario">
+            <Parameter Name="IdUsuario" Mode="In" Type="Int64" />
+            <Parameter Name="ImagenUsuario" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ActualizarInventario">
+            <Parameter Name="IdInventario" Mode="In" Type="Int64" />
+            <Parameter Name="Incrementar" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="ActualizarPerfil">
+            <Parameter Name="IdUsuario" Mode="In" Type="Int64" />
+            <Parameter Name="IdUbicacion" Mode="In" Type="Int64" />
+            <Parameter Name="NombreUsuario" Mode="In" Type="String" />
+            <Parameter Name="ApellidoUsuario" Mode="In" Type="String" />
+            <Parameter Name="Edad" Mode="In" Type="Int32" />
+            <Parameter Name="Correo" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ActualizarProducto">
+            <Parameter Name="IdProducto" Mode="In" Type="Int64" />
+            <Parameter Name="IdCategoria" Mode="In" Type="Int64" />
+            <Parameter Name="NombreProducto" Mode="In" Type="String" />
+            <Parameter Name="PrecioUnitario" Mode="In" Type="Decimal" />
+            <Parameter Name="Color" Mode="In" Type="String" />
+            <Parameter Name="Stock" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ActualizarRol">
+            <Parameter Name="IdRol" Mode="In" Type="Int64" />
+            <Parameter Name="NombreRol" Mode="In" Type="String" />
+            <Parameter Name="DescripcionRol" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ActualizarUsuario">
+            <Parameter Name="IdUsuario" Mode="In" Type="Int64" />
+            <Parameter Name="IdUbicacion" Mode="In" Type="Int64" />
+            <Parameter Name="IdRol" Mode="In" Type="Int64" />
+            <Parameter Name="NombreUsuario" Mode="In" Type="String" />
+            <Parameter Name="ApellidoUsuario" Mode="In" Type="String" />
+            <Parameter Name="Edad" Mode="In" Type="Int32" />
+            <Parameter Name="Correo" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="AgregarFavorito">
+            <Parameter Name="IdUsuario" Mode="In" Type="Int64" />
+            <Parameter Name="IdProducto" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="CambiarClave">
+            <Parameter Name="IdUsuario" Mode="In" Type="Int64" />
+            <Parameter Name="ClaveAnterior" Mode="In" Type="String" />
+            <Parameter Name="ClaveNueva" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ConsultarCategoria" ReturnType="Collection(InnovaTechDBModel.ConsultarCategoria_Result)">
+            <Parameter Name="IdCategoria" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="ConsultarCategorias" ReturnType="Collection(InnovaTechDBModel.ConsultarCategorias_Result)">
+            <Parameter Name="MostrarTodos" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="ConsultarFavoritos" ReturnType="Collection(InnovaTechDBModel.ConsultarFavoritos_Result)">
+            <Parameter Name="IdUsuario" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="ConsultarProducto" ReturnType="Collection(InnovaTechDBModel.ConsultarProducto_Result)">
+            <Parameter Name="IdProducto" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="ConsultarProductos" ReturnType="Collection(InnovaTechDBModel.ConsultarProductos_Result)">
+            <Parameter Name="MostrarTodos" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="ConsultarRol" ReturnType="Collection(InnovaTechDBModel.ConsultarRol_Result)">
+            <Parameter Name="IdRol" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="ConsultarRoles" ReturnType="Collection(InnovaTechDBModel.ConsultarRoles_Result)">
+            <Parameter Name="MostrarTodos" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="ConsultarUbicaciones" ReturnType="Collection(InnovaTechDBModel.ConsultarUbicaciones_Result)" />
+          <FunctionImport Name="ConsultarUsuario" ReturnType="Collection(InnovaTechDBModel.ConsultarUsuario_Result)">
+            <Parameter Name="IdUsuario" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="ConsultarUsuarios" ReturnType="Collection(InnovaTechDBModel.ConsultarUsuarios_Result)" />
+          <FunctionImport Name="CrearCategoria">
+            <Parameter Name="NombreCategoria" Mode="In" Type="String" />
+            <Parameter Name="DescripcionCategoria" Mode="In" Type="String" />
+            <Parameter Name="IconoCategoria" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="CrearRol" ReturnType="Collection(Int64)">
+            <Parameter Name="NombreRol" Mode="In" Type="String" />
+            <Parameter Name="DescripcionRol" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="EliminarCategoria">
+            <Parameter Name="IdCategoria" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="EliminarFavorito">
+            <Parameter Name="IdUsuario" Mode="In" Type="Int64" />
+            <Parameter Name="IdProducto" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="EliminarProducto">
+            <Parameter Name="IdProducto" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="EliminarRol">
+            <Parameter Name="IdRol" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="EliminarUsuario">
+            <Parameter Name="IdUsuario" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="GenerarClave" ReturnType="Collection(InnovaTechDBModel.GenerarClave_Result)">
+            <Parameter Name="Correo" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="IniciarSesionUsuario" ReturnType="Collection(InnovaTechDBModel.IniciarSesionUsuario_Result)">
+            <Parameter Name="Correo" Mode="In" Type="String" />
+            <Parameter Name="Clave" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="RegistrarError">
+            <Parameter Name="CodigoError" Mode="In" Type="Int32" />
+            <Parameter Name="MensajeError" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="RegistrarProducto" ReturnType="Collection(Int64)">
+            <Parameter Name="IdCategoria" Mode="In" Type="Int64" />
+            <Parameter Name="NombreProducto" Mode="In" Type="String" />
+            <Parameter Name="PrecioUnitario" Mode="In" Type="Decimal" />
+            <Parameter Name="Color" Mode="In" Type="String" />
+            <Parameter Name="Stock" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="RegistrarUsuario" ReturnType="Collection(Int64)">
+            <Parameter Name="IdUbicacion" Mode="In" Type="Int64" />
+            <Parameter Name="NombreUsuario" Mode="In" Type="String" />
+            <Parameter Name="ApellidoUsuario" Mode="In" Type="String" />
+            <Parameter Name="Edad" Mode="In" Type="Int32" />
+            <Parameter Name="Correo" Mode="In" Type="String" />
+            <Parameter Name="Clave" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="VisualizarPerfil" ReturnType="Collection(InnovaTechDBModel.VisualizarPerfil_Result)">
+            <Parameter Name="IdUsuario" Mode="In" Type="Int64" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="ConsultarCategoria_Result">
+          <Property Type="Int64" Name="IdCategoria" Nullable="false" />
+          <Property Type="String" Name="NombreCategoria" Nullable="false" MaxLength="42" />
+          <Property Type="String" Name="DescripcionCategoria" Nullable="false" MaxLength="160" />
+          <Property Type="Boolean" Name="Estado" Nullable="false" />
+          <Property Type="String" Name="IconoCategoria" Nullable="true" MaxLength="140" />
+        </ComplexType>
+        <ComplexType Name="ConsultarCategorias_Result">
+          <Property Type="Int64" Name="IdCategoria" Nullable="false" />
+          <Property Type="String" Name="NombreCategoria" Nullable="false" MaxLength="42" />
+          <Property Type="String" Name="DescripcionCategoria" Nullable="false" MaxLength="160" />
+          <Property Type="Boolean" Name="Estado" Nullable="false" />
+          <Property Type="String" Name="IconoCategoria" Nullable="true" MaxLength="140" />
+        </ComplexType>
+        <ComplexType Name="ConsultarFavoritos_Result">
+          <Property Type="Int64" Name="IdProducto" Nullable="false" />
+          <Property Type="String" Name="NombreProducto" Nullable="false" MaxLength="42" />
+          <Property Type="String" Name="NombreCategoria" Nullable="false" MaxLength="42" />
+          <Property Type="Decimal" Name="PrecioUnitario" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Int32" Name="Stock" Nullable="false" />
+          <Property Type="String" Name="Color" Nullable="false" MaxLength="24" />
+          <Property Type="Boolean" Name="Estado" Nullable="false" />
+          <Property Type="String" Name="ImagenProducto" Nullable="true" MaxLength="140" />
+        </ComplexType>
+        <ComplexType Name="ConsultarProducto_Result">
+          <Property Type="Int64" Name="IdProducto" Nullable="false" />
+          <Property Type="Int64" Name="IdInventario" Nullable="false" />
+          <Property Type="Int64" Name="IdCategoria" Nullable="false" />
+          <Property Type="String" Name="NombreProducto" Nullable="false" MaxLength="42" />
+          <Property Type="String" Name="NombreCategoria" Nullable="false" MaxLength="42" />
+          <Property Type="Decimal" Name="PrecioUnitario" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Int32" Name="Stock" Nullable="false" />
+          <Property Type="String" Name="Color" Nullable="false" MaxLength="24" />
+          <Property Type="Boolean" Name="Estado" Nullable="false" />
+          <Property Type="String" Name="ImagenProducto" Nullable="true" MaxLength="140" />
+        </ComplexType>
+        <ComplexType Name="ConsultarProductos_Result">
+          <Property Type="Int64" Name="IdProducto" Nullable="false" />
+          <Property Type="String" Name="NombreProducto" Nullable="false" MaxLength="42" />
+          <Property Type="String" Name="NombreCategoria" Nullable="false" MaxLength="42" />
+          <Property Type="Decimal" Name="PrecioUnitario" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Int32" Name="Stock" Nullable="false" />
+          <Property Type="String" Name="Color" Nullable="false" MaxLength="24" />
+          <Property Type="Boolean" Name="Estado" Nullable="false" />
+          <Property Type="String" Name="ImagenProducto" Nullable="true" MaxLength="140" />
+        </ComplexType>
+        <ComplexType Name="ConsultarRol_Result">
+          <Property Type="Int64" Name="IdRol" Nullable="false" />
+          <Property Type="String" Name="NombreRol" Nullable="false" MaxLength="42" />
+          <Property Type="String" Name="DescripcionRol" Nullable="false" MaxLength="160" />
+          <Property Type="Boolean" Name="Estado" Nullable="false" />
+          <Property Type="String" Name="ImagenRol" Nullable="true" MaxLength="140" />
+        </ComplexType>
+        <ComplexType Name="ConsultarRoles_Result">
+          <Property Type="Int64" Name="IdRol" Nullable="false" />
+          <Property Type="String" Name="NombreRol" Nullable="false" MaxLength="42" />
+          <Property Type="String" Name="DescripcionRol" Nullable="false" MaxLength="160" />
+          <Property Type="Boolean" Name="Estado" Nullable="false" />
+          <Property Type="String" Name="ImagenRol" Nullable="true" MaxLength="140" />
+        </ComplexType>
+        <ComplexType Name="ConsultarUbicaciones_Result">
+          <Property Type="Int64" Name="IdUbicacion" Nullable="false" />
+          <Property Type="String" Name="NombreDistrito" Nullable="false" MaxLength="42" />
+          <Property Type="Int64" Name="IdCanton" Nullable="false" />
+          <Property Type="String" Name="NombreCanton" Nullable="false" MaxLength="42" />
+          <Property Type="Int64" Name="IdProvincia" Nullable="false" />
+          <Property Type="String" Name="NombreProvincia" Nullable="false" MaxLength="42" />
+        </ComplexType>
+        <ComplexType Name="ConsultarUsuario_Result">
+          <Property Type="Int64" Name="IdUsuario" Nullable="false" />
+          <Property Type="Int64" Name="IdUbicacion" Nullable="false" />
+          <Property Type="Int64" Name="IdRol" Nullable="false" />
+          <Property Type="String" Name="NombreUsuario" Nullable="false" MaxLength="42" />
+          <Property Type="String" Name="ApellidoUsuario" Nullable="false" MaxLength="42" />
+          <Property Type="Int32" Name="Edad" Nullable="false" />
+          <Property Type="String" Name="Correo" Nullable="false" MaxLength="120" />
+          <Property Type="Boolean" Name="Estado" Nullable="false" />
+          <Property Type="String" Name="ImagenUsuario" Nullable="true" MaxLength="140" />
+        </ComplexType>
+        <ComplexType Name="ConsultarUsuarios_Result">
+          <Property Type="Int64" Name="IdUsuario" Nullable="false" />
+          <Property Type="String" Name="NombreUsuario" Nullable="false" MaxLength="42" />
+          <Property Type="String" Name="ApellidoUsuario" Nullable="false" MaxLength="42" />
+          <Property Type="Int32" Name="Edad" Nullable="false" />
+          <Property Type="String" Name="Correo" Nullable="false" MaxLength="120" />
+          <Property Type="String" Name="NombreRol" Nullable="false" MaxLength="42" />
+          <Property Type="String" Name="NombreDistrito" Nullable="false" MaxLength="42" />
+          <Property Type="String" Name="ImagenUsuario" Nullable="true" MaxLength="140" />
+        </ComplexType>
+        <ComplexType Name="GenerarClave_Result">
+          <Property Type="Int64" Name="IdUsuario" Nullable="false" />
+          <Property Type="String" Name="Correo" Nullable="false" MaxLength="120" />
+          <Property Type="String" Name="Clave" Nullable="false" MaxLength="42" />
+          <Property Type="String" Name="NombreUsuario" Nullable="false" MaxLength="42" />
+          <Property Type="String" Name="ApellidoUsuario" Nullable="false" MaxLength="42" />
+          <Property Type="Boolean" Name="Estado" Nullable="false" />
+          <Property Type="Boolean" Name="Temporal" Nullable="false" />
+          <Property Type="DateTime" Name="Vencimiento" Nullable="false" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="IniciarSesionUsuario_Result">
+          <Property Type="Int64" Name="IdUsuario" Nullable="false" />
+          <Property Type="Int64" Name="IdUbicacion" Nullable="false" />
+          <Property Type="Int64" Name="IdRol" Nullable="false" />
+          <Property Type="String" Name="NombreUsuario" Nullable="false" MaxLength="42" />
+          <Property Type="String" Name="ApellidoUsuario" Nullable="false" MaxLength="42" />
+          <Property Type="String" Name="NombreRol" Nullable="false" MaxLength="42" />
+          <Property Type="Int32" Name="Edad" Nullable="false" />
+          <Property Type="String" Name="Correo" Nullable="false" MaxLength="120" />
+          <Property Type="Boolean" Name="Estado" Nullable="false" />
+          <Property Type="Boolean" Name="Temporal" Nullable="false" />
+          <Property Type="DateTime" Name="Vencimiento" Nullable="false" Precision="23" />
+          <Property Type="String" Name="ImagenUsuario" Nullable="true" MaxLength="140" />
+        </ComplexType>
+        <ComplexType Name="VisualizarPerfil_Result">
+          <Property Type="String" Name="NombreUsuario" Nullable="false" MaxLength="42" />
+          <Property Type="String" Name="ApellidoUsuario" Nullable="false" MaxLength="42" />
+          <Property Type="Int32" Name="Edad" Nullable="false" />
+          <Property Type="String" Name="Correo" Nullable="false" MaxLength="120" />
+          <Property Type="String" Name="NombreDistrito" Nullable="false" MaxLength="42" />
+          <Property Type="String" Name="ImagenUsuario" Nullable="true" MaxLength="140" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="InnovaTechDBModelStoreContainer" CdmEntityContainer="InnovaTechDBEntities" >
+          <FunctionImportMapping FunctionImportName="ActualizarCategoria" FunctionName="InnovaTechDBModel.Store.ActualizarCategoria" />
+          <FunctionImportMapping FunctionImportName="ActualizarImagenProducto" FunctionName="InnovaTechDBModel.Store.ActualizarImagenProducto" />
+          <FunctionImportMapping FunctionImportName="ActualizarImagenRol" FunctionName="InnovaTechDBModel.Store.ActualizarImagenRol" />
+          <FunctionImportMapping FunctionImportName="ActualizarImagenUsuario" FunctionName="InnovaTechDBModel.Store.ActualizarImagenUsuario" />
+          <FunctionImportMapping FunctionImportName="ActualizarInventario" FunctionName="InnovaTechDBModel.Store.ActualizarInventario" />
+          <FunctionImportMapping FunctionImportName="ActualizarPerfil" FunctionName="InnovaTechDBModel.Store.ActualizarPerfil" />
+          <FunctionImportMapping FunctionImportName="ActualizarProducto" FunctionName="InnovaTechDBModel.Store.ActualizarProducto" />
+          <FunctionImportMapping FunctionImportName="ActualizarRol" FunctionName="InnovaTechDBModel.Store.ActualizarRol" />
+          <FunctionImportMapping FunctionImportName="ActualizarUsuario" FunctionName="InnovaTechDBModel.Store.ActualizarUsuario" />
+          <FunctionImportMapping FunctionImportName="AgregarFavorito" FunctionName="InnovaTechDBModel.Store.AgregarFavorito" />
+          <FunctionImportMapping FunctionImportName="CambiarClave" FunctionName="InnovaTechDBModel.Store.CambiarClave" />
+          <FunctionImportMapping FunctionImportName="ConsultarCategoria" FunctionName="InnovaTechDBModel.Store.ConsultarCategoria">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InnovaTechDBModel.ConsultarCategoria_Result">
+                <ScalarProperty Name="IdCategoria" ColumnName="IdCategoria" />
+                <ScalarProperty Name="NombreCategoria" ColumnName="NombreCategoria" />
+                <ScalarProperty Name="DescripcionCategoria" ColumnName="DescripcionCategoria" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="IconoCategoria" ColumnName="IconoCategoria" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ConsultarCategorias" FunctionName="InnovaTechDBModel.Store.ConsultarCategorias">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InnovaTechDBModel.ConsultarCategorias_Result">
+                <ScalarProperty Name="IdCategoria" ColumnName="IdCategoria" />
+                <ScalarProperty Name="NombreCategoria" ColumnName="NombreCategoria" />
+                <ScalarProperty Name="DescripcionCategoria" ColumnName="DescripcionCategoria" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="IconoCategoria" ColumnName="IconoCategoria" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ConsultarFavoritos" FunctionName="InnovaTechDBModel.Store.ConsultarFavoritos">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InnovaTechDBModel.ConsultarFavoritos_Result">
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="NombreProducto" ColumnName="NombreProducto" />
+                <ScalarProperty Name="NombreCategoria" ColumnName="NombreCategoria" />
+                <ScalarProperty Name="PrecioUnitario" ColumnName="PrecioUnitario" />
+                <ScalarProperty Name="Stock" ColumnName="Stock" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="ImagenProducto" ColumnName="ImagenProducto" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ConsultarProducto" FunctionName="InnovaTechDBModel.Store.ConsultarProducto">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InnovaTechDBModel.ConsultarProducto_Result">
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="IdInventario" ColumnName="IdInventario" />
+                <ScalarProperty Name="IdCategoria" ColumnName="IdCategoria" />
+                <ScalarProperty Name="NombreProducto" ColumnName="NombreProducto" />
+                <ScalarProperty Name="NombreCategoria" ColumnName="NombreCategoria" />
+                <ScalarProperty Name="PrecioUnitario" ColumnName="PrecioUnitario" />
+                <ScalarProperty Name="Stock" ColumnName="Stock" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="ImagenProducto" ColumnName="ImagenProducto" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ConsultarProductos" FunctionName="InnovaTechDBModel.Store.ConsultarProductos">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InnovaTechDBModel.ConsultarProductos_Result">
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="NombreProducto" ColumnName="NombreProducto" />
+                <ScalarProperty Name="NombreCategoria" ColumnName="NombreCategoria" />
+                <ScalarProperty Name="PrecioUnitario" ColumnName="PrecioUnitario" />
+                <ScalarProperty Name="Stock" ColumnName="Stock" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="ImagenProducto" ColumnName="ImagenProducto" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ConsultarRol" FunctionName="InnovaTechDBModel.Store.ConsultarRol">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InnovaTechDBModel.ConsultarRol_Result">
+                <ScalarProperty Name="IdRol" ColumnName="IdRol" />
+                <ScalarProperty Name="NombreRol" ColumnName="NombreRol" />
+                <ScalarProperty Name="DescripcionRol" ColumnName="DescripcionRol" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="ImagenRol" ColumnName="ImagenRol" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ConsultarRoles" FunctionName="InnovaTechDBModel.Store.ConsultarRoles">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InnovaTechDBModel.ConsultarRoles_Result">
+                <ScalarProperty Name="IdRol" ColumnName="IdRol" />
+                <ScalarProperty Name="NombreRol" ColumnName="NombreRol" />
+                <ScalarProperty Name="DescripcionRol" ColumnName="DescripcionRol" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="ImagenRol" ColumnName="ImagenRol" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ConsultarUbicaciones" FunctionName="InnovaTechDBModel.Store.ConsultarUbicaciones">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InnovaTechDBModel.ConsultarUbicaciones_Result">
+                <ScalarProperty Name="IdUbicacion" ColumnName="IdUbicacion" />
+                <ScalarProperty Name="NombreDistrito" ColumnName="NombreDistrito" />
+                <ScalarProperty Name="IdCanton" ColumnName="IdCanton" />
+                <ScalarProperty Name="NombreCanton" ColumnName="NombreCanton" />
+                <ScalarProperty Name="IdProvincia" ColumnName="IdProvincia" />
+                <ScalarProperty Name="NombreProvincia" ColumnName="NombreProvincia" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ConsultarUsuario" FunctionName="InnovaTechDBModel.Store.ConsultarUsuario">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InnovaTechDBModel.ConsultarUsuario_Result">
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="IdUbicacion" ColumnName="IdUbicacion" />
+                <ScalarProperty Name="IdRol" ColumnName="IdRol" />
+                <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
+                <ScalarProperty Name="ApellidoUsuario" ColumnName="ApellidoUsuario" />
+                <ScalarProperty Name="Edad" ColumnName="Edad" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="ImagenUsuario" ColumnName="ImagenUsuario" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ConsultarUsuarios" FunctionName="InnovaTechDBModel.Store.ConsultarUsuarios">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InnovaTechDBModel.ConsultarUsuarios_Result">
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
+                <ScalarProperty Name="ApellidoUsuario" ColumnName="ApellidoUsuario" />
+                <ScalarProperty Name="Edad" ColumnName="Edad" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="NombreRol" ColumnName="NombreRol" />
+                <ScalarProperty Name="NombreDistrito" ColumnName="NombreDistrito" />
+                <ScalarProperty Name="ImagenUsuario" ColumnName="ImagenUsuario" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CrearCategoria" FunctionName="InnovaTechDBModel.Store.CrearCategoria" />
+          <FunctionImportMapping FunctionImportName="CrearRol" FunctionName="InnovaTechDBModel.Store.CrearRol" />
+          <FunctionImportMapping FunctionImportName="EliminarCategoria" FunctionName="InnovaTechDBModel.Store.EliminarCategoria" />
+          <FunctionImportMapping FunctionImportName="EliminarFavorito" FunctionName="InnovaTechDBModel.Store.EliminarFavorito" />
+          <FunctionImportMapping FunctionImportName="EliminarProducto" FunctionName="InnovaTechDBModel.Store.EliminarProducto" />
+          <FunctionImportMapping FunctionImportName="EliminarRol" FunctionName="InnovaTechDBModel.Store.EliminarRol" />
+          <FunctionImportMapping FunctionImportName="EliminarUsuario" FunctionName="InnovaTechDBModel.Store.EliminarUsuario" />
+          <FunctionImportMapping FunctionImportName="GenerarClave" FunctionName="InnovaTechDBModel.Store.GenerarClave">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InnovaTechDBModel.GenerarClave_Result">
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Clave" ColumnName="Clave" />
+                <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
+                <ScalarProperty Name="ApellidoUsuario" ColumnName="ApellidoUsuario" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Temporal" ColumnName="Temporal" />
+                <ScalarProperty Name="Vencimiento" ColumnName="Vencimiento" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="IniciarSesionUsuario" FunctionName="InnovaTechDBModel.Store.IniciarSesionUsuario">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InnovaTechDBModel.IniciarSesionUsuario_Result">
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="IdUbicacion" ColumnName="IdUbicacion" />
+                <ScalarProperty Name="IdRol" ColumnName="IdRol" />
+                <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
+                <ScalarProperty Name="ApellidoUsuario" ColumnName="ApellidoUsuario" />
+                <ScalarProperty Name="NombreRol" ColumnName="NombreRol" />
+                <ScalarProperty Name="Edad" ColumnName="Edad" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Temporal" ColumnName="Temporal" />
+                <ScalarProperty Name="Vencimiento" ColumnName="Vencimiento" />
+                <ScalarProperty Name="ImagenUsuario" ColumnName="ImagenUsuario" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="RegistrarError" FunctionName="InnovaTechDBModel.Store.RegistrarError" />
+          <FunctionImportMapping FunctionImportName="RegistrarProducto" FunctionName="InnovaTechDBModel.Store.RegistrarProducto" />
+          <FunctionImportMapping FunctionImportName="RegistrarUsuario" FunctionName="InnovaTechDBModel.Store.RegistrarUsuario" />
+          <FunctionImportMapping FunctionImportName="VisualizarPerfil" FunctionName="InnovaTechDBModel.Store.VisualizarPerfil">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InnovaTechDBModel.VisualizarPerfil_Result">
+                <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
+                <ScalarProperty Name="ApellidoUsuario" ColumnName="ApellidoUsuario" />
+                <ScalarProperty Name="Edad" ColumnName="Edad" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="NombreDistrito" ColumnName="NombreDistrito" />
+                <ScalarProperty Name="ImagenUsuario" ColumnName="ImagenUsuario" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,70 @@
+﻿@model List<InnovaTechWeb.Entidades.Categoria>
+
+@{
+    ViewBag.Title = "ConsultarCategorias";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Productos</h6>
+    </div>
+    <div class="card-body">
+        <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap5">
+            <div class="col-sm-12">
+                <div class="col-sm-12">
+
+                    @if (ViewBag.MsjPantalla != null)
+                    {
+                        <div class="alert alert-warning" role="alert" style="text-align:center">
+                            @ViewBag.MsjPantalla
+                        </div>
+                    }
+
+                    <table id="Tabla" class="table table-striped" style="width:100%">
+                        <thead>
+                            <tr role="row">
+                                <th>Id</th>
+                                <th>Nombre</th>
+                                <th>Icono</th>
+                                <th>Descripcion</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr class="odd">
+                                    <td>@item.IdCategoria</td>
+                                    <td>@item.NombreCategoria</td>
+                                    <td>@item.IconoCategoria</td>
+                                    <td>@item.DescripcionCategoria</td>
+                                    @if (item.Estado)
+                                    {
+                                        <td><i class="bi bi-eye-fill"></i></td>
+                                    }
+                                    else
+                                    {
+                                        <td><i class="bi bi-eye"></i></td>
+                                    }
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#Tabla').DataTable({
+            language: {
+                url: '//cdn.datatables.net/plug-ins/2.0.3/i18n/es-ES.json',
+            }
+        });
+    });
+</script>
