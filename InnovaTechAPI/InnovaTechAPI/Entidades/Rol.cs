@@ -15,7 +15,7 @@ namespace InnovaTechAPI.Entidades
 
         public bool Estado { get; set; }
 
-        public string ImagenRol { get; set; }
+        public string IconoRol { get; set; }
     }
 
     public class ResultadoRol

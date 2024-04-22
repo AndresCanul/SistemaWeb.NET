@@ -15,7 +15,7 @@ namespace InnovaTechWeb.Entidades
 
         public bool Estado { get; set; }
 
-        public string ImagenRol { get; set; }
+        public string IconoRol { get; set; }
     }
 
     public class ResultadoRol
@@ -24,8 +24,8 @@ namespace InnovaTechWeb.Entidades
 
         public string Detalle { get; set; }
 
-        public List<Rol> Datos { get; set; }
-
         public Rol Dato { get; set; }
+
+        public List<Rol> Datos { get; set; }        
     }
 }

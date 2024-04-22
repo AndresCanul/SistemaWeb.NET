@@ -2,17 +2,18 @@
 using System.Configuration;
 using System.Net.Http.Json;
 using System.Net.Http;
+using System.Web;
 
 
 namespace InnovaTechWeb.Models
 {
     public class UsuarioModel
     {
-        public ResultadoUsuario ConsultarUsuario(long Id)
+        public ResultadoUsuario ConsultarUsuario(long IdUsuario)
         {
             using (var client = new HttpClient())
             {
-                string url = ConfigurationManager.AppSettings["urlWebApi"] + "Usuario/ConsultarUsuario?Id=" + Id;
+                string url = ConfigurationManager.AppSettings["urlWebApi"] + "Usuario/ConsultarUsuario?IdUsuario=" + IdUsuario;
                 var respuesta = client.GetAsync(url).Result;
 
                 if (respuesta.IsSuccessStatusCode)
@@ -22,11 +23,12 @@ namespace InnovaTechWeb.Models
             }
         }
 
-        public ResultadoUsuario VisualizarPerfil(long Id)
+        public ResultadoUsuario VisualizarPerfil()
         {
             using (var client = new HttpClient())
             {
-                string url = ConfigurationManager.AppSettings["urlWebApi"] + "Usuario/VisualizarPerfil?Id=" + Id;
+                long IdUsuario = long.Parse(HttpContext.Current.Session["IdUsuario"].ToString());
+                string url = ConfigurationManager.AppSettings["urlWebApi"] + "Usuario/VisualizarPerfil?IdUsuario=" + IdUsuario;
                 var respuesta = client.GetAsync(url).Result;
 
                 if (respuesta.IsSuccessStatusCode)
@@ -40,7 +42,8 @@ namespace InnovaTechWeb.Models
         {
             using (var client = new HttpClient())
             {
-                string url = ConfigurationManager.AppSettings["urlWebApi"] + "Usuario/ConsultarUsuarios";
+                long IdUsuario = long.Parse(HttpContext.Current.Session["IdUsuario"].ToString());
+                string url = ConfigurationManager.AppSettings["urlWebApi"] + "Usuario/ConsultarUsuarios?IdUsuario=" + IdUsuario;
                 var respuesta = client.GetAsync(url).Result;
 
                 if (respuesta.IsSuccessStatusCode)

@@ -28,6 +28,19 @@ namespace InnovaTechAPI.Models
         }
     
     
+        public virtual int ActualizarCarrito(Nullable<long> idCarrito, Nullable<int> cantidad)
+        {
+            var idCarritoParameter = idCarrito.HasValue ?
+                new ObjectParameter("IdCarrito", idCarrito) :
+                new ObjectParameter("IdCarrito", typeof(long));
+    
+            var cantidadParameter = cantidad.HasValue ?
+                new ObjectParameter("Cantidad", cantidad) :
+                new ObjectParameter("Cantidad", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ActualizarCarrito", idCarritoParameter, cantidadParameter);
+        }
+    
         public virtual int ActualizarCategoria(Nullable<long> idCategoria, string nombreCategoria, string descripcionCategoria, string iconoCategoria)
         {
             var idCategoriaParameter = idCategoria.HasValue ?
@@ -62,19 +75,6 @@ namespace InnovaTechAPI.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ActualizarImagenProducto", idProductoParameter, imagenProductoParameter);
         }
     
-        public virtual int ActualizarImagenRol(Nullable<long> idRol, string imagenRol)
-        {
-            var idRolParameter = idRol.HasValue ?
-                new ObjectParameter("IdRol", idRol) :
-                new ObjectParameter("IdRol", typeof(long));
-    
-            var imagenRolParameter = imagenRol != null ?
-                new ObjectParameter("ImagenRol", imagenRol) :
-                new ObjectParameter("ImagenRol", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ActualizarImagenRol", idRolParameter, imagenRolParameter);
-        }
-    
         public virtual int ActualizarImagenUsuario(Nullable<long> idUsuario, string imagenUsuario)
         {
             var idUsuarioParameter = idUsuario.HasValue ?
@@ -88,17 +88,17 @@ namespace InnovaTechAPI.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ActualizarImagenUsuario", idUsuarioParameter, imagenUsuarioParameter);
         }
     
-        public virtual int ActualizarInventario(Nullable<long> idInventario, Nullable<bool> incrementar)
+        public virtual int ActualizarInventario(Nullable<long> idProducto, Nullable<bool> incrementar)
         {
-            var idInventarioParameter = idInventario.HasValue ?
-                new ObjectParameter("IdInventario", idInventario) :
-                new ObjectParameter("IdInventario", typeof(long));
+            var idProductoParameter = idProducto.HasValue ?
+                new ObjectParameter("IdProducto", idProducto) :
+                new ObjectParameter("IdProducto", typeof(long));
     
             var incrementarParameter = incrementar.HasValue ?
                 new ObjectParameter("Incrementar", incrementar) :
                 new ObjectParameter("Incrementar", typeof(bool));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ActualizarInventario", idInventarioParameter, incrementarParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ActualizarInventario", idProductoParameter, incrementarParameter);
         }
     
         public virtual int ActualizarPerfil(Nullable<long> idUsuario, Nullable<long> idUbicacion, string nombreUsuario, string apellidoUsuario, Nullable<int> edad, string correo)
@@ -159,7 +159,7 @@ namespace InnovaTechAPI.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ActualizarProducto", idProductoParameter, idCategoriaParameter, nombreProductoParameter, precioUnitarioParameter, colorParameter, stockParameter);
         }
     
-        public virtual int ActualizarRol(Nullable<long> idRol, string nombreRol, string descripcionRol)
+        public virtual int ActualizarRol(Nullable<long> idRol, string nombreRol, string descripcionRol, string iconoRol)
         {
             var idRolParameter = idRol.HasValue ?
                 new ObjectParameter("IdRol", idRol) :
@@ -173,7 +173,11 @@ namespace InnovaTechAPI.Models
                 new ObjectParameter("DescripcionRol", descripcionRol) :
                 new ObjectParameter("DescripcionRol", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ActualizarRol", idRolParameter, nombreRolParameter, descripcionRolParameter);
+            var iconoRolParameter = iconoRol != null ?
+                new ObjectParameter("IconoRol", iconoRol) :
+                new ObjectParameter("IconoRol", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ActualizarRol", idRolParameter, nombreRolParameter, descripcionRolParameter, iconoRolParameter);
         }
     
         public virtual int ActualizarUsuario(Nullable<long> idUsuario, Nullable<long> idUbicacion, Nullable<long> idRol, string nombreUsuario, string apellidoUsuario, Nullable<int> edad, string correo)
@@ -209,6 +213,19 @@ namespace InnovaTechAPI.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ActualizarUsuario", idUsuarioParameter, idUbicacionParameter, idRolParameter, nombreUsuarioParameter, apellidoUsuarioParameter, edadParameter, correoParameter);
         }
     
+        public virtual int AgregarCarrito(Nullable<long> idUsuario, Nullable<long> idProducto)
+        {
+            var idUsuarioParameter = idUsuario.HasValue ?
+                new ObjectParameter("IdUsuario", idUsuario) :
+                new ObjectParameter("IdUsuario", typeof(long));
+    
+            var idProductoParameter = idProducto.HasValue ?
+                new ObjectParameter("IdProducto", idProducto) :
+                new ObjectParameter("IdProducto", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AgregarCarrito", idUsuarioParameter, idProductoParameter);
+        }
+    
         public virtual int AgregarFavorito(Nullable<long> idUsuario, Nullable<long> idProducto)
         {
             var idUsuarioParameter = idUsuario.HasValue ?
@@ -220,6 +237,23 @@ namespace InnovaTechAPI.Models
                 new ObjectParameter("IdProducto", typeof(long));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AgregarFavorito", idUsuarioParameter, idProductoParameter);
+        }
+    
+        public virtual int AgregarValoracion(Nullable<long> idUsuario, Nullable<long> idProducto, Nullable<int> calificacion)
+        {
+            var idUsuarioParameter = idUsuario.HasValue ?
+                new ObjectParameter("IdUsuario", idUsuario) :
+                new ObjectParameter("IdUsuario", typeof(long));
+    
+            var idProductoParameter = idProducto.HasValue ?
+                new ObjectParameter("IdProducto", idProducto) :
+                new ObjectParameter("IdProducto", typeof(long));
+    
+            var calificacionParameter = calificacion.HasValue ?
+                new ObjectParameter("Calificacion", calificacion) :
+                new ObjectParameter("Calificacion", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AgregarValoracion", idUsuarioParameter, idProductoParameter, calificacionParameter);
         }
     
         public virtual int CambiarClave(Nullable<long> idUsuario, string claveAnterior, string claveNueva)
@@ -239,6 +273,37 @@ namespace InnovaTechAPI.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CambiarClave", idUsuarioParameter, claveAnteriorParameter, claveNuevaParameter);
         }
     
+        public virtual ObjectResult<Nullable<int>> ConsultarAgregado(Nullable<long> idUsuario, Nullable<long> idProducto)
+        {
+            var idUsuarioParameter = idUsuario.HasValue ?
+                new ObjectParameter("IdUsuario", idUsuario) :
+                new ObjectParameter("IdUsuario", typeof(long));
+    
+            var idProductoParameter = idProducto.HasValue ?
+                new ObjectParameter("IdProducto", idProducto) :
+                new ObjectParameter("IdProducto", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("ConsultarAgregado", idUsuarioParameter, idProductoParameter);
+        }
+    
+        public virtual ObjectResult<ConsultarCanton_Result> ConsultarCanton(Nullable<long> idUbicacion)
+        {
+            var idUbicacionParameter = idUbicacion.HasValue ?
+                new ObjectParameter("IdUbicacion", idUbicacion) :
+                new ObjectParameter("IdUbicacion", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ConsultarCanton_Result>("ConsultarCanton", idUbicacionParameter);
+        }
+    
+        public virtual ObjectResult<ConsultarCarrito_Result> ConsultarCarrito(Nullable<long> idUsuario)
+        {
+            var idUsuarioParameter = idUsuario.HasValue ?
+                new ObjectParameter("IdUsuario", idUsuario) :
+                new ObjectParameter("IdUsuario", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ConsultarCarrito_Result>("ConsultarCarrito", idUsuarioParameter);
+        }
+    
         public virtual ObjectResult<ConsultarCategoria_Result> ConsultarCategoria(Nullable<long> idCategoria)
         {
             var idCategoriaParameter = idCategoria.HasValue ?
@@ -255,6 +320,42 @@ namespace InnovaTechAPI.Models
                 new ObjectParameter("MostrarTodos", typeof(bool));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ConsultarCategorias_Result>("ConsultarCategorias", mostrarTodosParameter);
+        }
+    
+        public virtual ObjectResult<ConsultarDetalleFacturas_Result> ConsultarDetalleFacturas(Nullable<long> idOrden)
+        {
+            var idOrdenParameter = idOrden.HasValue ?
+                new ObjectParameter("IdOrden", idOrden) :
+                new ObjectParameter("IdOrden", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ConsultarDetalleFacturas_Result>("ConsultarDetalleFacturas", idOrdenParameter);
+        }
+    
+        public virtual ObjectResult<ConsultarDistritos_Result> ConsultarDistritos()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ConsultarDistritos_Result>("ConsultarDistritos");
+        }
+    
+        public virtual ObjectResult<ConsultarFacturas_Result> ConsultarFacturas(Nullable<long> idUsuario)
+        {
+            var idUsuarioParameter = idUsuario.HasValue ?
+                new ObjectParameter("IdUsuario", idUsuario) :
+                new ObjectParameter("IdUsuario", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ConsultarFacturas_Result>("ConsultarFacturas", idUsuarioParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> ConsultarFavorito(Nullable<long> idUsuario, Nullable<long> idProducto)
+        {
+            var idUsuarioParameter = idUsuario.HasValue ?
+                new ObjectParameter("IdUsuario", idUsuario) :
+                new ObjectParameter("IdUsuario", typeof(long));
+    
+            var idProductoParameter = idProducto.HasValue ?
+                new ObjectParameter("IdProducto", idProducto) :
+                new ObjectParameter("IdProducto", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("ConsultarFavorito", idUsuarioParameter, idProductoParameter);
         }
     
         public virtual ObjectResult<ConsultarFavoritos_Result> ConsultarFavoritos(Nullable<long> idUsuario)
@@ -282,6 +383,15 @@ namespace InnovaTechAPI.Models
                 new ObjectParameter("MostrarTodos", typeof(bool));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ConsultarProductos_Result>("ConsultarProductos", mostrarTodosParameter);
+        }
+    
+        public virtual ObjectResult<ConsultarProvincia_Result> ConsultarProvincia(Nullable<long> idCanton)
+        {
+            var idCantonParameter = idCanton.HasValue ?
+                new ObjectParameter("IdCanton", idCanton) :
+                new ObjectParameter("IdCanton", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ConsultarProvincia_Result>("ConsultarProvincia", idCantonParameter);
         }
     
         public virtual ObjectResult<ConsultarRol_Result> ConsultarRol(Nullable<long> idRol)
@@ -316,9 +426,26 @@ namespace InnovaTechAPI.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ConsultarUsuario_Result>("ConsultarUsuario", idUsuarioParameter);
         }
     
-        public virtual ObjectResult<ConsultarUsuarios_Result> ConsultarUsuarios()
+        public virtual ObjectResult<ConsultarUsuarios_Result> ConsultarUsuarios(Nullable<long> idUsuario)
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ConsultarUsuarios_Result>("ConsultarUsuarios");
+            var idUsuarioParameter = idUsuario.HasValue ?
+                new ObjectParameter("IdUsuario", idUsuario) :
+                new ObjectParameter("IdUsuario", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ConsultarUsuarios_Result>("ConsultarUsuarios", idUsuarioParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> ConsultarValoracion(Nullable<long> idUsuario, Nullable<long> idProducto)
+        {
+            var idUsuarioParameter = idUsuario.HasValue ?
+                new ObjectParameter("IdUsuario", idUsuario) :
+                new ObjectParameter("IdUsuario", typeof(long));
+    
+            var idProductoParameter = idProducto.HasValue ?
+                new ObjectParameter("IdProducto", idProducto) :
+                new ObjectParameter("IdProducto", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("ConsultarValoracion", idUsuarioParameter, idProductoParameter);
         }
     
         public virtual int CrearCategoria(string nombreCategoria, string descripcionCategoria, string iconoCategoria)
@@ -338,7 +465,7 @@ namespace InnovaTechAPI.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CrearCategoria", nombreCategoriaParameter, descripcionCategoriaParameter, iconoCategoriaParameter);
         }
     
-        public virtual ObjectResult<Nullable<long>> CrearRol(string nombreRol, string descripcionRol)
+        public virtual ObjectResult<Nullable<long>> CrearRol(string nombreRol, string descripcionRol, string iconoRol)
         {
             var nombreRolParameter = nombreRol != null ?
                 new ObjectParameter("NombreRol", nombreRol) :
@@ -348,7 +475,72 @@ namespace InnovaTechAPI.Models
                 new ObjectParameter("DescripcionRol", descripcionRol) :
                 new ObjectParameter("DescripcionRol", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<long>>("CrearRol", nombreRolParameter, descripcionRolParameter);
+            var iconoRolParameter = iconoRol != null ?
+                new ObjectParameter("IconoRol", iconoRol) :
+                new ObjectParameter("IconoRol", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<long>>("CrearRol", nombreRolParameter, descripcionRolParameter, iconoRolParameter);
+        }
+    
+        public virtual int DeshabilitarCategoria(Nullable<long> idCategoria, Nullable<bool> estado)
+        {
+            var idCategoriaParameter = idCategoria.HasValue ?
+                new ObjectParameter("IdCategoria", idCategoria) :
+                new ObjectParameter("IdCategoria", typeof(long));
+    
+            var estadoParameter = estado.HasValue ?
+                new ObjectParameter("Estado", estado) :
+                new ObjectParameter("Estado", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeshabilitarCategoria", idCategoriaParameter, estadoParameter);
+        }
+    
+        public virtual int DeshabilitarProducto(Nullable<long> idProducto, Nullable<bool> estado)
+        {
+            var idProductoParameter = idProducto.HasValue ?
+                new ObjectParameter("IdProducto", idProducto) :
+                new ObjectParameter("IdProducto", typeof(long));
+    
+            var estadoParameter = estado.HasValue ?
+                new ObjectParameter("Estado", estado) :
+                new ObjectParameter("Estado", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeshabilitarProducto", idProductoParameter, estadoParameter);
+        }
+    
+        public virtual int DeshabilitarRol(Nullable<long> idRol, Nullable<bool> estado)
+        {
+            var idRolParameter = idRol.HasValue ?
+                new ObjectParameter("IdRol", idRol) :
+                new ObjectParameter("IdRol", typeof(long));
+    
+            var estadoParameter = estado.HasValue ?
+                new ObjectParameter("Estado", estado) :
+                new ObjectParameter("Estado", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeshabilitarRol", idRolParameter, estadoParameter);
+        }
+    
+        public virtual int DeshabilitarUsuario(Nullable<long> idUsuario, Nullable<bool> estado)
+        {
+            var idUsuarioParameter = idUsuario.HasValue ?
+                new ObjectParameter("IdUsuario", idUsuario) :
+                new ObjectParameter("IdUsuario", typeof(long));
+    
+            var estadoParameter = estado.HasValue ?
+                new ObjectParameter("Estado", estado) :
+                new ObjectParameter("Estado", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeshabilitarUsuario", idUsuarioParameter, estadoParameter);
+        }
+    
+        public virtual int EliminarCarrito(Nullable<long> idCarrito)
+        {
+            var idCarritoParameter = idCarrito.HasValue ?
+                new ObjectParameter("IdCarrito", idCarrito) :
+                new ObjectParameter("IdCarrito", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("EliminarCarrito", idCarritoParameter);
         }
     
         public virtual int EliminarCategoria(Nullable<long> idCategoria)
@@ -433,6 +625,15 @@ namespace InnovaTechAPI.Models
                 new ObjectParameter("MensajeError", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("RegistrarError", codigoErrorParameter, mensajeErrorParameter);
+        }
+    
+        public virtual int RegistrarOrden(Nullable<long> idUsuario)
+        {
+            var idUsuarioParameter = idUsuario.HasValue ?
+                new ObjectParameter("IdUsuario", idUsuario) :
+                new ObjectParameter("IdUsuario", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("RegistrarOrden", idUsuarioParameter);
         }
     
         public virtual ObjectResult<Nullable<long>> RegistrarProducto(Nullable<long> idCategoria, string nombreProducto, Nullable<decimal> precioUnitario, string color, Nullable<int> stock)

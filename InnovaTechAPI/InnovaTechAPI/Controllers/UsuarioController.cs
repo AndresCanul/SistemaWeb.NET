@@ -16,7 +16,7 @@ namespace InnovaTechAPI.Controllers
 
         [HttpGet]
         [Route("Usuario/ConsultarUsuario")]
-        public ResultadoUsuario ConsultarUsuario(long Id)
+        public ResultadoUsuario ConsultarUsuario(long IdUsuario)
         {
             var resultado = new ResultadoUsuario();
 
@@ -25,7 +25,7 @@ namespace InnovaTechAPI.Controllers
                 //Llamar a la base de datos
                 using (var db = new InnovaTechDBEntities())
                 {
-                    var dato = db.ConsultarUsuario(Id).FirstOrDefault();
+                    var dato = db.ConsultarUsuario(IdUsuario).FirstOrDefault();
 
                     if (dato != null)
                     {
@@ -52,7 +52,7 @@ namespace InnovaTechAPI.Controllers
 
         [HttpGet]
         [Route("Usuario/VisualizarPerfil")]
-        public ResultadoUsuario VisualizarPerfil(long Id)
+        public ResultadoUsuario VisualizarPerfil(long IdUsuario)
         {
             var resultado = new ResultadoUsuario();
 
@@ -61,7 +61,7 @@ namespace InnovaTechAPI.Controllers
                 //Llamar a la base de datos
                 using (var db = new InnovaTechDBEntities())
                 {
-                    var dato = db.VisualizarPerfil(Id).FirstOrDefault();
+                    var dato = db.VisualizarPerfil(IdUsuario).FirstOrDefault();
 
                     if (dato != null)
                     {
@@ -88,7 +88,7 @@ namespace InnovaTechAPI.Controllers
 
         [HttpGet]
         [Route("Usuario/ConsultarUsuarios")]
-        public ResultadoUsuario ConsultarUsuarios()
+        public ResultadoUsuario ConsultarUsuarios(long IdUsuario)
         {
             var resultado = new ResultadoUsuario();
 
@@ -97,7 +97,7 @@ namespace InnovaTechAPI.Controllers
                 //Llamar a la base de datos
                 using (var db = new InnovaTechDBEntities())
                 {
-                    var datos = db.ConsultarUsuarios().ToList();
+                    var datos = db.ConsultarUsuarios(IdUsuario).ToList();
 
                     if (datos.Count > 0)
                     {
@@ -384,9 +384,9 @@ namespace InnovaTechAPI.Controllers
             return resultado;
         }
 
-        [HttpDelete]
-        [Route("Usuario/EliminarUsuario")]
-        public Resultado EliminarUsuario(long Id)
+        [HttpPut]
+        [Route("Usuario/DeshabilitarUsuario")]
+        public Resultado DeshabilitarUsuario(Usuario entidad)
         {
             var resultado = new Resultado();
 
@@ -395,7 +395,41 @@ namespace InnovaTechAPI.Controllers
                 //Llamar a la base de datos
                 using (var db = new InnovaTechDBEntities())
                 {
-                    var dato = db.EliminarUsuario(Id);
+                    var dato = db.DeshabilitarUsuario(entidad.IdUsuario, entidad.Estado);
+
+                    if (dato > 0)
+                    {
+                        resultado.Codigo = 0;
+                        resultado.Detalle = string.Empty;
+                    }
+                    else
+                    {
+                        resultado.Codigo = -1;
+                        resultado.Detalle = "Su informacion ya se encuentra registrada";
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                resultado.Codigo = -1;
+                resultado.Detalle = "su informacion no se pudo registrar";
+            }
+
+            return resultado;
+        }
+
+        [HttpDelete]
+        [Route("Usuario/EliminarUsuario")]
+        public Resultado EliminarUsuario(long IdUsuario)
+        {
+            var resultado = new Resultado();
+
+            try
+            {
+                //Llamar a la base de datos
+                using (var db = new InnovaTechDBEntities())
+                {
+                    var dato = db.EliminarUsuario(IdUsuario);
 
                     if (dato > 0)
                     {

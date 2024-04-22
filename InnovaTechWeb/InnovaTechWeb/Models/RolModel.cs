@@ -11,11 +11,11 @@ namespace InnovaTechWeb.Models
 {
     public class RolModel
     {
-        public ResultadoRol ConsultarRol(long Id)
+        public ResultadoRol ConsultarRol(long IdRol)
         {
             using (var client = new HttpClient())
             {
-                string url = ConfigurationManager.AppSettings["urlWebApi"] + "Rol/ConsultarRol?Id=" + Id;
+                string url = ConfigurationManager.AppSettings["urlWebApi"] + "Rol/ConsultarRol?IdRol=" + IdRol;
                 var respuesta = client.GetAsync(url).Result;
 
                 if (respuesta.IsSuccessStatusCode)
@@ -69,11 +69,11 @@ namespace InnovaTechWeb.Models
             }
         }
 
-        public Resultado ActualizarImagenRol(Rol entidad)
+        public Resultado DeshabilitarRol(Rol entidad)
         {
             using (var client = new HttpClient())
             {
-                string url = ConfigurationManager.AppSettings["urlWebApi"] + "Rol/ActualizarImagenRol";
+                string url = ConfigurationManager.AppSettings["urlWebApi"] + "Rol/DeshabilitarRol";
                 JsonContent jsonEntidad = JsonContent.Create(entidad);
                 var respuesta = client.PutAsync(url, jsonEntidad).Result;
 
@@ -84,11 +84,11 @@ namespace InnovaTechWeb.Models
             }
         }
 
-        public Resultado EliminarRol(long Id)
+        public Resultado EliminarRol(long IdRol)
         {
             using (var client = new HttpClient())
             {
-                string url = ConfigurationManager.AppSettings["urlWebApi"] + "Rol/EliminarRol?Id=" + Id;
+                string url = ConfigurationManager.AppSettings["urlWebApi"] + "Rol/EliminarRol?IdRol=" + IdRol;
                 var respuesta = client.DeleteAsync(url).Result;
 
                 if (respuesta.IsSuccessStatusCode)

@@ -13,7 +13,7 @@ namespace InnovaTechAPI.Controllers
     {
         [HttpGet]
         [Route("Categoria/ConsultarCategoria")]
-        public ResultadoCategoria ConsultarCategoria(long Id)
+        public ResultadoCategoria ConsultarCategoria(long IdCategoria)
         {
             var resultado = new ResultadoCategoria();
 
@@ -22,7 +22,7 @@ namespace InnovaTechAPI.Controllers
                 //Llamar a la base de datos
                 using (var db = new InnovaTechDBEntities())
                 {
-                    var dato = db.ConsultarCategoria(Id).FirstOrDefault();
+                    var dato = db.ConsultarCategoria(IdCategoria).FirstOrDefault();
 
                     if (dato != null)
                     {
@@ -104,7 +104,7 @@ namespace InnovaTechAPI.Controllers
                     else
                     {
                         resultado.Codigo = -1;
-                        resultado.Detalle = "Su informacion ya se encuentra registrada";
+                        resultado.Detalle = "La Categoria ya se ha creado anteriormente";
                     }
                 }
             }
@@ -112,7 +112,7 @@ namespace InnovaTechAPI.Controllers
             catch (Exception)
             {
                 resultado.Codigo = -1;
-                resultado.Detalle = "su informacion no se pudo registrar";
+                resultado.Detalle = "La Categoria no se ha creaado";
             }
 
             return resultado;
@@ -126,7 +126,6 @@ namespace InnovaTechAPI.Controllers
 
             try
             {
-                //Llamar a la base de datos
                 using (var db = new InnovaTechDBEntities())
                 {
                     var dato = db.ActualizarCategoria(entidad.IdCategoria, entidad.NombreCategoria, entidad.DescripcionCategoria, entidad.IconoCategoria);
@@ -139,31 +138,30 @@ namespace InnovaTechAPI.Controllers
                     else
                     {
                         resultado.Codigo = -1;
-                        resultado.Detalle = "Su informacion ya se encuentra registrada";
+                        resultado.Detalle = "Los datos introducidos de la Categoria presentan errores";
                     }
                 }
             }
             catch (Exception)
             {
                 resultado.Codigo = -1;
-                resultado.Detalle = "su informacion no se pudo registrar";
+                resultado.Detalle = "La Categoria no se ha actualizado";
             }
 
             return resultado;
         }
 
-        [HttpDelete]
-        [Route("Categoria/EliminarCategoria")]
-        public Resultado EliminarCategoria(long Id)
+        [HttpPut]
+        [Route("Categoria/DeshabilitarCategoria")]
+        public Resultado DeshabilitarCategoria(Categoria entidad)
         {
             var resultado = new Resultado();
 
             try
             {
-                //Llamar a la base de datos
                 using (var db = new InnovaTechDBEntities())
                 {
-                    var dato = db.EliminarCategoria(Id);
+                    var dato = db.DeshabilitarCategoria(entidad.IdCategoria, entidad.Estado);
 
                     if (dato > 0)
                     {
@@ -173,14 +171,48 @@ namespace InnovaTechAPI.Controllers
                     else
                     {
                         resultado.Codigo = -1;
-                        resultado.Detalle = "Su informacion ya se encuentra registrada";
+                        resultado.Detalle = "Los datos de la Categoria presentan errores";
                     }
                 }
             }
             catch (Exception)
             {
                 resultado.Codigo = -1;
-                resultado.Detalle = "su informacion no se pudo registrar";
+                resultado.Detalle = "La Categoria no se ha deshabilitado";
+            }
+
+            return resultado;
+        }
+
+        [HttpDelete]
+        [Route("Categoria/EliminarCategoria")]
+        public Resultado EliminarCategoria(long IdCategoria)
+        {
+            var resultado = new Resultado();
+
+            try
+            {
+                //Llamar a la base de datos
+                using (var db = new InnovaTechDBEntities())
+                {
+                    var dato = db.EliminarCategoria(IdCategoria);
+
+                    if (dato > 0)
+                    {
+                        resultado.Codigo = 0;
+                        resultado.Detalle = string.Empty;
+                    }
+                    else
+                    {
+                        resultado.Codigo = -1;
+                        resultado.Detalle = "La Categoria no existe";
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                resultado.Codigo = -1;
+                resultado.Detalle = "La Categoria no se pudo eliminar";
             }
 
             return resultado;

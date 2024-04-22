@@ -13,7 +13,7 @@ namespace InnovaTechAPI.Controllers
     {
         [HttpGet]
         [Route("Producto/ConsultarProducto")]
-        public ResultadoProducto ConsultarProducto(long Id)
+        public ResultadoProducto ConsultarProducto(long IdProducto)
         {
             var resultado = new ResultadoProducto();
 
@@ -22,7 +22,7 @@ namespace InnovaTechAPI.Controllers
                 //Llamar a la base de datos
                 using (var db = new InnovaTechDBEntities())
                 {
-                    var dato = db.ConsultarProducto(Id).FirstOrDefault();
+                    var dato = db.ConsultarProducto(IdProducto).FirstOrDefault();
 
                     if (dato != null)
                     {
@@ -153,6 +153,40 @@ namespace InnovaTechAPI.Controllers
         }
 
         [HttpPut]
+        [Route("Producto/ActualizarInventario")]
+        public Resultado ActualizarInventario(Producto entidad)
+        {
+            var resultado = new Resultado();
+
+            try
+            {
+                //Llamar a la base de datos
+                using (var db = new InnovaTechDBEntities())
+                {
+                    var resp = db.ActualizarInventario(entidad.IdProducto, entidad.Incrementar);
+
+                    if (resp > 0)
+                    {
+                        resultado.Codigo = 0;
+                        resultado.Detalle = string.Empty;
+                    }
+                    else
+                    {
+                        resultado.Codigo = -1;
+                        resultado.Detalle = "El stock del producto no se ha modificado";
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                resultado.Codigo = -1;
+                resultado.Detalle = "El stock del producto no se pudo actualizar";
+            }
+
+            return resultado;
+        }
+
+        [HttpPut]
         [Route("Producto/ActualizarImagenProducto")]
         public Resultado ActualizarImagenProducto(Producto entidad)
         {
@@ -186,9 +220,9 @@ namespace InnovaTechAPI.Controllers
             return resultado;
         }
 
-        [HttpDelete]
-        [Route("Producto/EliminarProducto")]
-        public Resultado EliminarProducto(long Id)
+        [HttpPut]
+        [Route("Producto/DeshabilitarProducto")]
+        public Resultado DeshabilitarProducto(Producto entidad)
         {
             var resultado = new Resultado();
 
@@ -197,7 +231,41 @@ namespace InnovaTechAPI.Controllers
                 //Llamar a la base de datos
                 using (var db = new InnovaTechDBEntities())
                 {
-                    var dato = db.EliminarProducto(Id);
+                    var resp = db.DeshabilitarProducto(entidad.IdProducto, entidad.Estado);
+
+                    if (resp > 0)
+                    {
+                        resultado.Codigo = 0;
+                        resultado.Detalle = string.Empty;
+                    }
+                    else
+                    {
+                        resultado.Codigo = -1;
+                        resultado.Detalle = "Su informacion ya se encuentra registrada";
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                resultado.Codigo = -1;
+                resultado.Detalle = "su informacion no se pudo registrar";
+            }
+
+            return resultado;
+        }
+
+        [HttpDelete]
+        [Route("Producto/EliminarProducto")]
+        public Resultado EliminarProducto(long IdProducto)
+        {
+            var resultado = new Resultado();
+
+            try
+            {
+                //Llamar a la base de datos
+                using (var db = new InnovaTechDBEntities())
+                {
+                    var dato = db.EliminarProducto(IdProducto);
 
                     if (dato > 0)
                     {

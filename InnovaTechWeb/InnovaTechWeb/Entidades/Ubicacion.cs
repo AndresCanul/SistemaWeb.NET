@@ -25,8 +25,8 @@ namespace InnovaTechWeb.Entidades
 
         public string Detalle { get; set; }
 
-        public List<Ubicacion> Datos { get; set; }
-
         public Ubicacion Dato { get; set; }
+
+        public List<Ubicacion> Datos { get; set; }        
     }
 }

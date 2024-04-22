@@ -8,6 +8,8 @@ using System.Web.Mvc;
 
 namespace InnovaTechWeb.Controllers
 {
+    [FiltroSeguridad]
+    [OutputCache(NoStore = true, VaryByParam = "*", Duration = 0)]
     public class UsuarioController : Controller
     {
         UsuarioModel modelo = new UsuarioModel();
@@ -26,4 +28,6 @@ namespace InnovaTechWeb.Controllers
             }
         }
     }
+
+
 }

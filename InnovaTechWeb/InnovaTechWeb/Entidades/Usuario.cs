@@ -45,8 +45,8 @@ namespace InnovaTechWeb.Entidades
 
         public string Detalle { get; set; }
 
-        public List<Usuario> Datos { get; set; }
-
         public Usuario Dato { get; set; }
+
+        public List<Usuario> Datos { get; set; }        
     }
 }

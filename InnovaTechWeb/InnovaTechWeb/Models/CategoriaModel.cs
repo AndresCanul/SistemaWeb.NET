@@ -11,11 +11,11 @@ namespace InnovaTechWeb.Models
 {
     public class CategoriaModel
     {
-        public ResultadoCategoria ConsultarCategoria(long Id)
+        public ResultadoCategoria ConsultarCategoria(long IdCategoria)
         {
             using (var client = new HttpClient())
             {
-                string url = ConfigurationManager.AppSettings["urlWebApi"] + "Categoria/ConsultarCategoria?Id=" + Id;
+                string url = ConfigurationManager.AppSettings["urlWebApi"] + "Categoria/ConsultarCategoria?Id=" + IdCategoria;
                 var respuesta = client.GetAsync(url).Result;
 
                 if (respuesta.IsSuccessStatusCode)
@@ -69,11 +69,26 @@ namespace InnovaTechWeb.Models
             }
         }
 
-        public Resultado EliminarCategoria(long Id)
+        public Resultado DeshabilitarCategoria(Categoria entidad)
         {
             using (var client = new HttpClient())
             {
-                string url = ConfigurationManager.AppSettings["urlWebApi"] + "Categoria/EliminarCategoria?Id=" + Id;
+                string url = ConfigurationManager.AppSettings["urlWebApi"] + "Categoria/DeshabilitarCategoria";
+                JsonContent jsonEntidad = JsonContent.Create(entidad);
+                var respuesta = client.PutAsync(url, jsonEntidad).Result;
+
+                if (respuesta.IsSuccessStatusCode)
+                    return respuesta.Content.ReadFromJsonAsync<Resultado>().Result;
+                else
+                    return null;
+            }
+        }
+
+        public Resultado EliminarCategoria(long IdCategoria)
+        {
+            using (var client = new HttpClient())
+            {
+                string url = ConfigurationManager.AppSettings["urlWebApi"] + "Categoria/EliminarCategoria?Id=" + IdCategoria;
                 var respuesta = client.DeleteAsync(url).Result;
 
                 if (respuesta.IsSuccessStatusCode)

@@ -27,6 +27,7 @@ namespace InnovaTechWeb.Controllers
 
             if (resultado.Codigo == 0)
             {
+                Session["IdUsuario"] = resultado.Dato.IdUsuario;
                 Session["NombreUsuario"] = resultado.Dato.NombreUsuario;
                 Session["ApellidoUsuario"] = resultado.Dato.ApellidoUsuario;
                 Session["RolUsuario"] = resultado.Dato.IdRol;

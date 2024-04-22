@@ -9,9 +9,13 @@ using System.Web.Mvc;
 
 namespace InnovaTechWeb.Controllers
 {
+    [FiltroSeguridad]
+    [OutputCache(NoStore = true, VaryByParam = "*", Duration = 0)]
     public class ProductoController : Controller
     {
         ProductoModel modelo = new ProductoModel();
+
+
 
         [HttpGet]
         public ActionResult ConsultarProductos()

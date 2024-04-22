@@ -13,7 +13,7 @@ namespace InnovaTechAPI.Controllers
     {
         [HttpGet]
         [Route("Rol/ConsultarRol")]
-        public ResultadoRol ConsultarRol(long Id)
+        public ResultadoRol ConsultarRol(long IdRol)
         {
             var resultado = new ResultadoRol();
 
@@ -22,7 +22,7 @@ namespace InnovaTechAPI.Controllers
                 //Llamar a la base de datos
                 using (var db = new InnovaTechDBEntities())
                 {
-                    var dato = db.ConsultarRol(Id).FirstOrDefault();
+                    var dato = db.ConsultarRol(IdRol).FirstOrDefault();
 
                     if (dato != null)
                     {
@@ -94,7 +94,7 @@ namespace InnovaTechAPI.Controllers
                 //Llamar a la base de datos
                 using (var db = new InnovaTechDBEntities())
                 {
-                    var dato = db.CrearRol(entidad.NombreRol, entidad.DescripcionRol).FirstOrDefault();
+                    var dato = db.CrearRol(entidad.NombreRol, entidad.DescripcionRol, entidad.IconoRol).FirstOrDefault();
 
                     if (dato > 0)
                     {
@@ -129,7 +129,7 @@ namespace InnovaTechAPI.Controllers
                 //Llamar a la base de datos
                 using (var db = new InnovaTechDBEntities())
                 {
-                    var dato = db.ActualizarRol(entidad.IdRol, entidad.NombreRol, entidad.DescripcionRol);
+                    var dato = db.ActualizarRol(entidad.IdRol, entidad.NombreRol, entidad.DescripcionRol, entidad.IconoRol);
 
                     if (dato > 0)
                     {
@@ -153,8 +153,8 @@ namespace InnovaTechAPI.Controllers
         }
 
         [HttpPut]
-        [Route("Rol/ActualizarImagenRol")]
-        public Resultado ActualizarImagenRol(Rol entidad)
+        [Route("Rol/DeshabilitarRol")]
+        public Resultado DeshabilitarRol(Rol entidad)
         {
             var resultado = new Resultado();
 
@@ -163,13 +163,14 @@ namespace InnovaTechAPI.Controllers
                 //Llamar a la base de datos
                 using (var db = new InnovaTechDBEntities())
                 {
-                    var resp = db.ActualizarImagenRol(entidad.IdRol, entidad.ImagenRol);
+                    var dato = db.DeshabilitarRol(entidad.IdRol, entidad.Estado);
 
-                    if (resp > 0)
+                    if (dato > 0)
                     {
                         resultado.Codigo = 0;
                         resultado.Detalle = string.Empty;
                     }
+
                     else
                     {
                         resultado.Codigo = -1;
@@ -188,7 +189,7 @@ namespace InnovaTechAPI.Controllers
 
         [HttpDelete]
         [Route("Rol/EliminarRol")]
-        public Resultado EliminarRol(long Id)
+        public Resultado EliminarRol(long IdRol)
         {
             var resultado = new Resultado();
 
@@ -197,7 +198,7 @@ namespace InnovaTechAPI.Controllers
                 //Llamar a la base de datos
                 using (var db = new InnovaTechDBEntities())
                 {
-                    var dato = db.EliminarRol(Id);
+                    var dato = db.EliminarRol(IdRol);
 
                     if (dato > 0)
                     {

@@ -5,16 +5,18 @@ using System.Web;
 
 namespace InnovaTechAPI.Entidades
 {
-    public class Inventario
+    public class Valoracion
     {
-        public long IdInventario { get; set; }
+        public long IdValoracion { get; set; }
 
-        public int Stock { get; set; }
+        public long IdUsuario { get; set; }
 
-        public bool Incrementar { get; set; }
+        public long IdProducto { get; set; }
+
+        public int Calificacion { get; set; }
     }
 
-    public class ResultadoInventario
+    public class ResultadoValoracion
     {
         public int Codigo { get; set; }
 

@@ -7,7 +7,6 @@ GO
 CREATE DATABASE [InnovaTechDB];
 GO
 
-
 USE [InnovaTechDB]
 GO
 
@@ -18,6 +17,7 @@ CREATE TABLE Inventarios (
   IdInventario             BIGINT IDENTITY(1,1) NOT NULL PRIMARY KEY,
   Stock                    INT NOT NULL
 );
+GO
 
 -------------------------------------------------------------------------
 -- TABLA DE LAS CATEGORIAS
@@ -29,6 +29,7 @@ CREATE TABLE Categorias (
   Estado                  BIT NOT NULL,
   IconoCategoria          VARCHAR(140) NULL
 );
+GO
 
 -------------------------------------------------------------------------
 -- TABLA DE LOS PRODUCTOS
@@ -47,6 +48,7 @@ CREATE TABLE Productos (
   CONSTRAINT FKProductosCategorias FOREIGN KEY (IdCategoria)
     REFERENCES Categorias (IdCategoria)
 );
+GO
 
 -------------------------------------------------------------------------
 -- TABLA DE LOS ROLES
@@ -56,8 +58,9 @@ CREATE TABLE Roles (
   NombreRol               VARCHAR(42) NOT NULL,
   DescripcionRol          VARCHAR(160) NOT NULL,
   Estado                  BIT NOT NULL,
-  ImagenRol               VARCHAR(140) NULL
+  IconoRol                VARCHAR(140) NULL
 );
+GO
 
 -------------------------------------------------------------------------
 -- TABLA DE LAS PROVINCIAS
@@ -66,6 +69,7 @@ CREATE TABLE Provincias (
   IdProvincia             BIGINT IDENTITY(1,1) NOT NULL PRIMARY KEY,
   NombreProvincia         VARCHAR(42) NOT NULL
 );
+GO
 
 -------------------------------------------------------------------------
 -- TABLA DE LOS CANTONES
@@ -77,6 +81,7 @@ CREATE TABLE Cantones (
   CONSTRAINT FKCantonesProvincias FOREIGN KEY (IdProvincia)
     REFERENCES Provincias (IdProvincia)
 );
+GO
 
 -------------------------------------------------------------------------
 -- TABLA DE LAS UBICACIONES
@@ -88,6 +93,7 @@ CREATE TABLE Ubicaciones (
   CONSTRAINT FKUbicacionesCantones FOREIGN KEY (IdCanton)
     REFERENCES Cantones (IdCanton)
 );
+GO
 
 -------------------------------------------------------------------------
 -- TABLA DE LOS USUARIOS
@@ -110,6 +116,7 @@ CREATE TABLE Usuarios (
   CONSTRAINT FKUsuariosUbicaciones FOREIGN KEY (IdUbicacion)
     REFERENCES Ubicaciones (IdUbicacion)
 );
+GO
 
 -------------------------------------------------------------------------
 -- TABLA DE LOS PRODUCTOS FAVORITOS POR USUARIO
@@ -123,6 +130,7 @@ CREATE TABLE Favoritos (
   CONSTRAINT FKFavoritosProductos FOREIGN KEY (IdProducto)
     REFERENCES Productos (IdProducto)
 );
+GO
 
 -------------------------------------------------------------------------
 -- TABLA DE LAS VALORACIONES POR PRODUCTO
@@ -131,11 +139,32 @@ CREATE TABLE Valoraciones (
   IdValoracion            BIGINT IDENTITY(1,1) NOT NULL PRIMARY KEY,
   IdUsuario               BIGINT NOT NULL,
   IdProducto              BIGINT NOT NULL,
+  Calificacion			  INT NOT NULL,
   CONSTRAINT FKValoracionesUsuarios FOREIGN KEY (IdUsuario)
     REFERENCES Usuarios (IdUsuario),
   CONSTRAINT FKValoracionesProductos FOREIGN KEY (IdProducto)
     REFERENCES Productos (IdProducto)
 );
+GO
+
+-------------------------------------------------------------------------
+-- TABLA DE CARRITO
+-------------------------------------------------------------------------
+CREATE TABLE Carrito (
+  IdCarrito               BIGINT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+  IdUsuario               BIGINT NOT NULL,
+  IdProducto              BIGINT NOT NULL,
+  FechaCarrito			  DATETIME NOT NULL,
+  Cantidad				  INT NOT NULL,
+  Impuestos               DECIMAL(18,2) NOT NULL,
+  SubTotal			      DECIMAL(18,2) NOT NULL,  
+  Total                   DECIMAL(18,2) NOT NULL,
+  CONSTRAINT FKCarritoUsuarios FOREIGN KEY (IdUsuario)
+    REFERENCES Usuarios (IdUsuario),
+  CONSTRAINT FKCarritoProductos FOREIGN KEY (IdProducto)
+    REFERENCES Productos (IdProducto)
+);
+GO
 
 -------------------------------------------------------------------------
 -- TABLA DE LAS ORDENES
@@ -144,25 +173,32 @@ CREATE TABLE Ordenes (
   IdOrden                 BIGINT IDENTITY(1,1) NOT NULL PRIMARY KEY,
   IdUsuario               BIGINT NOT NULL,
   FechaOrden              DATE NOT NULL,
+  Impuestos               DECIMAL(18,2) NOT NULL,
+  SubTotal			      DECIMAL(18,2) NOT NULL,  
+  Total                   DECIMAL(18,2) NOT NULL,
   CONSTRAINT FKOrdenesUsuarios FOREIGN KEY (IdUsuario)
     REFERENCES Usuarios (IdUsuario)
 );
+GO
 
 -------------------------------------------------------------------------
 -- TABLA DE LOS DETALLES DE LAS ORDENES
 -------------------------------------------------------------------------
 CREATE TABLE DetallesOrdenes (
   IdDetalleOrden          BIGINT IDENTITY(1,1) NOT NULL PRIMARY KEY,
-  IdProducto              BIGINT NOT NULL,
   IdOrden                 BIGINT NOT NULL,
-  Total                   DECIMAL(18, 2) NOT NULL,
-  Subtotal                DECIMAL(18, 2) NOT NULL,
+  IdProducto              BIGINT NOT NULL,  
   Cantidad                INT NOT NULL,
+  Precio				  DECIMAL(18, 2) NOT NULL,
+  Impuestos               DECIMAL(18, 2) NOT NULL,  
+  Subtotal                DECIMAL(18, 2) NOT NULL,  
+  Total                   DECIMAL(18, 2) NOT NULL,  
   CONSTRAINT FKDetallesOrdenesOrdenes FOREIGN KEY (IdOrden)
     REFERENCES Ordenes (IdOrden),
   CONSTRAINT FKDetallesOrdenesProductos FOREIGN KEY (IdProducto)
     REFERENCES Productos (IdProducto)
 );
+GO
 
 -------------------------------------------------------------------------
 -- TABLA DE LOS ERRORES DEL SISTEMA
@@ -173,6 +209,7 @@ CREATE TABLE ErroresSistema (
   MensajeError           VARCHAR(64) NOT NULL,
   FechaError             DATETIME NOT NULL
 );
+GO
 
 -------------------------------------------------------------------------
 -- ELIMINAR LOS DATOS DE LAS TABLAS
@@ -205,6 +242,12 @@ DBCC CHECKIDENT (Usuarios, RESEED, 0);
 DELETE FROM Favoritos;
 DBCC CHECKIDENT (Favoritos, RESEED, 0);
 
+DELETE FROM Valoraciones;
+DBCC CHECKIDENT (Valoraciones, RESEED, 0);
+
+DELETE FROM Carrito;
+DBCC CHECKIDENT (Carrito, RESEED, 0);
+
 DELETE FROM Ordenes;
 DBCC CHECKIDENT (Ordenes, RESEED, 0);
 
@@ -213,7 +256,6 @@ DBCC CHECKIDENT (DetallesOrdenes, RESEED, 0);
 
 DELETE FROM ErroresSistema;
 DBCC CHECKIDENT (ErroresSistema, RESEED, 0);
-
 
 -------------------------------------------------------------------------
 -- ELIMINAR LOS CONSTRAINTS DE LAS TABLAS
@@ -231,6 +273,12 @@ ALTER TABLE Usuarios DROP CONSTRAINT FKUsuariosUbicaciones;
 
 ALTER TABLE Favoritos DROP CONSTRAINT FKFavoritosProductos;
 ALTER TABLE Favoritos DROP CONSTRAINT FKFavoritosUsuarios;
+
+ALTER TABLE Valoraciones DROP CONSTRAINT FKValoracionesProductos;
+ALTER TABLE Valoraciones DROP CONSTRAINT FKValoracionesUsuarios;
+
+ALTER TABLE Carrito DROP CONSTRAINT FKCarritoProductos;
+ALTER TABLE Carrito DROP CONSTRAINT FKCarritoUsuarios;
 
 ALTER TABLE Ordenes DROP CONSTRAINT FKOrdenesUsuarios;
 
@@ -250,6 +298,8 @@ DROP TABLE Cantones;
 DROP TABLE Ubicaciones;
 DROP TABLE Usuarios;
 DROP TABLE Favoritos;
+DROP TABLE Valoraciones;
+DROP TABLE Carrito;
 DROP TABLE Ordenes;
 DROP TABLE DetallesOrdenes;
 DROP TABLE ErroresSistema;

@@ -11,11 +11,11 @@ namespace InnovaTechWeb.Models
 {
     public class ProductoModel
     {
-        public ResultadoProducto ConsultarProducto(long Id)
+        public ResultadoProducto ConsultarProducto(long IdProducto)
         {
             using (var client = new HttpClient())
             {
-                string url = ConfigurationManager.AppSettings["urlWebApi"] + "Producto/ConsultarProducto?Id=" + Id;
+                string url = ConfigurationManager.AppSettings["urlWebApi"] + "Producto/ConsultarProducto?IdProducto=" + IdProducto;
                 var respuesta = client.GetAsync(url).Result;
 
                 if (respuesta.IsSuccessStatusCode)
@@ -69,6 +69,21 @@ namespace InnovaTechWeb.Models
             }
         }
 
+        public Resultado ActualizarInventario(Producto entidad)
+        {
+            using (var client = new HttpClient())
+            {
+                string url = ConfigurationManager.AppSettings["urlWebApi"] + "Producto/ActualizarInventario";
+                JsonContent jsonEntidad = JsonContent.Create(entidad);
+                var respuesta = client.PutAsync(url, jsonEntidad).Result;
+
+                if (respuesta.IsSuccessStatusCode)
+                    return respuesta.Content.ReadFromJsonAsync<Resultado>().Result;
+                else
+                    return null;
+            }
+        }
+
         public Resultado ActualizarImagenProducto(Producto entidad)
         {
             using (var client = new HttpClient())
@@ -84,11 +99,26 @@ namespace InnovaTechWeb.Models
             }
         }
 
-        public Resultado EliminarProducto(long Id)
+        public Resultado DeshabilitarProducto(Producto entidad)
         {
             using (var client = new HttpClient())
             {
-                string url = ConfigurationManager.AppSettings["urlWebApi"] + "Producto/EliminarProducto?Id=" + Id;
+                string url = ConfigurationManager.AppSettings["urlWebApi"] + "Producto/DeshabilitarProducto";
+                JsonContent jsonEntidad = JsonContent.Create(entidad);
+                var respuesta = client.PutAsync(url, jsonEntidad).Result;
+
+                if (respuesta.IsSuccessStatusCode)
+                    return respuesta.Content.ReadFromJsonAsync<Resultado>().Result;
+                else
+                    return null;
+            }
+        }
+
+        public Resultado EliminarProducto(long IdProducto)
+        {
+            using (var client = new HttpClient())
+            {
+                string url = ConfigurationManager.AppSettings["urlWebApi"] + "Producto/EliminarProducto?IdProducto=" + IdProducto;
                 var respuesta = client.DeleteAsync(url).Result;
 
                 if (respuesta.IsSuccessStatusCode)

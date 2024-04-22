@@ -21,5 +21,6 @@ namespace InnovaTechAPI.Models
         public string NombreRol { get; set; }
         public string NombreDistrito { get; set; }
         public string ImagenUsuario { get; set; }
+        public bool Estado { get; set; }
     }
 }

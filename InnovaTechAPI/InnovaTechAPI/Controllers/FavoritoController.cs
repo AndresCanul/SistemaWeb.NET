@@ -12,8 +12,44 @@ namespace InnovaTechAPI.Controllers
     public class FavoritoController : ApiController
     {
         [HttpGet]
+        [Route("Favorito/ConsultarFavorito")]
+        public Resultado ConsultarFavorito(long IdUsuario, long IdProducto)
+        {
+            var resultado = new Resultado();
+
+            try
+            {
+                //Llamar a la base de datos
+                using (var db = new InnovaTechDBEntities())
+                {
+                    var dato = db.ConsultarFavorito(IdUsuario, IdProducto).FirstOrDefault();
+
+                    if (dato != null)
+                    {
+                        resultado.Codigo = 0;
+                        resultado.Detalle = string.Empty;
+                        resultado.Valor = dato;
+                    }
+
+                    else
+                    {
+                        resultado.Codigo = -1;
+                        resultado.Detalle = "No se encontraron resultados";
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                resultado.Codigo = -1;
+                resultado.Detalle = "Se presento un error en el sistema";
+            }
+
+            return resultado;
+        }
+
+        [HttpGet]
         [Route("Favorito/ConsultarFavoritos")]
-        public ResultadoFavorito ConsultarFavoritos(long Id)
+        public ResultadoFavorito ConsultarFavoritos(long IdUsuario)
         {
             var resultado = new ResultadoFavorito();
 
@@ -22,7 +58,7 @@ namespace InnovaTechAPI.Controllers
                 //Llamar a la base de datos
                 using (var db = new InnovaTechDBEntities())
                 {
-                    var dato = db.ConsultarFavoritos(Id).FirstOrDefault();
+                    var dato = db.ConsultarFavoritos(IdUsuario).FirstOrDefault();
 
                     if (dato != null)
                     {

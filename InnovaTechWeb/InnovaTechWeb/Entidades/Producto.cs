@@ -25,6 +25,8 @@ namespace InnovaTechWeb.Entidades
 
         public bool Estado { get; set; }
 
+        public bool Incrementar { get; set; }
+
         public string ImagenProducto { get; set; }
     }
 
@@ -34,8 +36,8 @@ namespace InnovaTechWeb.Entidades
 
         public string Detalle { get; set; }
 
-        public List<Producto> Datos { get; set; }
-
         public Producto Dato { get; set; }
+
+        public List<Producto> Datos { get; set; }        
     }
 }

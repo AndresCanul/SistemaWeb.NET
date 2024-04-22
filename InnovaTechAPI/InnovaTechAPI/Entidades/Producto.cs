@@ -25,6 +25,8 @@ namespace InnovaTechAPI.Entidades
 
         public bool Estado { get; set; }
 
+        public bool Incrementar { get; set; }
+
         public string ImagenProducto { get; set; }
     }
 

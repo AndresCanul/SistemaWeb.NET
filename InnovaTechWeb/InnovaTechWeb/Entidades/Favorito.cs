@@ -8,14 +8,23 @@ namespace InnovaTechWeb.Entidades
     public class Favorito
     {
         public long IdFavorito { get; set; }
+
         public long IdUsuario { get; set; }
+
         public long IdProducto { get; set; }
+
         public string NombreProducto { get; set; }
+
         public string NombreCategoria { get; set; }
+
         public decimal PrecioCategoria { get; set; }
+
         public int Stock { get; set; }
+
         public string Color { get; set; }
+
         public bool Estado { get; set; }
+
         public string ImagenProducto { get; set; }
     }
 
@@ -25,8 +34,8 @@ namespace InnovaTechWeb.Entidades
 
         public string Detalle { get; set; }
 
-        public List<Favorito> Datos { get; set; }
-
         public Favorito Dato { get; set; }
+
+        public List<Favorito> Datos { get; set; }
     }
 }

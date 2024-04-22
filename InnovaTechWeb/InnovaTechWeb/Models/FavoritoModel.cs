@@ -11,11 +11,12 @@ namespace InnovaTechWeb.Models
 {
     public class FavoritoModel
     {
-        public ResultadoFavorito ConsultarFavoritos(long Id)
+        public ResultadoFavorito ConsultarFavorito(long IdProducto)
         {
             using (var client = new HttpClient())
             {
-                string url = ConfigurationManager.AppSettings["urlWebApi"] + "Favorito/ConsultarFavoritos?Id=" + Id;
+                long IdUsuario = long.Parse(HttpContext.Current.Session["IdUsuario"].ToString());
+                string url = ConfigurationManager.AppSettings["urlWebApi"] + "Favorito/ConsultarFavorito?IdUsuario=" + IdUsuario + "&IdProducto=" + IdProducto;
                 var respuesta = client.GetAsync(url).Result;
 
                 if (respuesta.IsSuccessStatusCode)
@@ -25,10 +26,27 @@ namespace InnovaTechWeb.Models
             }
         }
 
-        public Resultado AgregarFavorito(Favorito entidad)
+        public ResultadoFavorito ConsultarFavoritos(long IdUsuario)
         {
             using (var client = new HttpClient())
             {
+                string url = ConfigurationManager.AppSettings["urlWebApi"] + "Favorito/ConsultarFavoritos?Id=" + IdUsuario;
+                var respuesta = client.GetAsync(url).Result;
+
+                if (respuesta.IsSuccessStatusCode)
+                    return respuesta.Content.ReadFromJsonAsync<ResultadoFavorito>().Result;
+                else
+                    return null;
+            }
+        }
+
+        public Resultado AgregarFavorito(long IdProducto)
+        {
+            using (var client = new HttpClient())
+            {
+                Favorito entidad = new Favorito();
+                entidad.IdProducto = IdProducto;
+
                 string url = ConfigurationManager.AppSettings["urlWebApi"] + "Favorito/AgregarFavorito";
                 JsonContent jsonEntidad = JsonContent.Create(entidad);
                 var respuesta = client.PostAsync(url, jsonEntidad).Result;
@@ -40,11 +58,12 @@ namespace InnovaTechWeb.Models
             }
         }
 
-        public Resultado EliminarProducto(long IdUsuario, long IdProducto)
+        public Resultado EliminarFavorito(long IdProducto)
         {
             using (var client = new HttpClient())
             {
-                string url = ConfigurationManager.AppSettings["urlWebApi"] + "Favorito/EliminarFavorito?IdUsuario={IdUsuario}&IdProducto={IdProducto}";
+                long IdUsuario = long.Parse(HttpContext.Current.Session["IdUsuario"].ToString());
+                string url = ConfigurationManager.AppSettings["urlWebApi"] + "Favorito/EliminarFavorito?IdUsuario=" + IdUsuario + "&IdProducto=" + IdProducto;
                 var respuesta = client.DeleteAsync(url).Result;
 
                 if (respuesta.IsSuccessStatusCode)

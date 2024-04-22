@@ -11,7 +11,7 @@ namespace InnovaTechWeb.Models
     {
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            if (filterContext.HttpContext.Session["NombreUsuario"] == null)
+            if (filterContext.HttpContext.Session["IdUsuario"] == null)
             {
                 filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary
                 {

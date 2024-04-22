@@ -36,7 +36,6 @@ namespace InnovaTechAPI.Entidades
         public string Clave { get; set; }
 
         public string ClaveNueva { get; set; }
-
     }
 
     public class ResultadoUsuario

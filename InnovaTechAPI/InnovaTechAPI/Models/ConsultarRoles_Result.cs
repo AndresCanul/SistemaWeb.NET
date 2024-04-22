@@ -17,6 +17,6 @@ namespace InnovaTechAPI.Models
         public string NombreRol { get; set; }
         public string DescripcionRol { get; set; }
         public bool Estado { get; set; }
-        public string ImagenRol { get; set; }
+        public string IconoRol { get; set; }
     }
 }

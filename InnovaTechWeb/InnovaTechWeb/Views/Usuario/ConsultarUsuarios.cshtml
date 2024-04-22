@@ -7,7 +7,7 @@
 
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Productos</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Lista de Usuarios</h6>
     </div>
     <div class="card-body">
         <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap5">
@@ -21,8 +21,8 @@
                         </div>
                     }
 
-                    <table id="Tabla" class="table table-striped" style="width:100%">
-                        <thead>
+                    <table id="Tabla" class="table" style="width:100%">
+                        <thead class="bg-light">
                             <tr role="row">
                                 <th>Id</th>
                                 <th>Nombre</th>
@@ -31,10 +31,10 @@
                                 <th>Correo</th>
                                 <th>Rol</th>
                                 <th>Distrito</th>
-                                <th>Imagen</th>
                                 <th>Estado</th>
                             </tr>
                         </thead>
+
                         <tbody>
                             @foreach (var item in Model)
                             {
@@ -46,9 +46,18 @@
                                     <td>@item.Correo</td>
                                     <td>@item.NombreRol</td>
                                     <td>@item.NombreDistrito</td>
-
-                                    <td style="text-align:center"><img src="@item.ImagenUsuario" style="width:125px; height:125px"></td>
-                                    <td><i class="bi bi-eye-fill"></i></td>
+                                    <td>
+                                        <div class="text-center">
+                                            @if (item.Estado)
+                                            {
+                                                <a onclick="CambiarEstado(item.Estado);" class="btn btn-primary"><i class="bi bi-eye-fill"></i></a>
+                                            }
+                                            else
+                                            {
+                                                <a onclick="CambiarEstado(item.Estado);" class="btn btn-primary"><i class="bi bi-eye"></i></a>
+                                            }
+                                        </div>                                        
+                                     </td>                                       
                                 </tr>
                             }
                         </tbody>
@@ -60,12 +69,21 @@
 </div>
 
 <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+<script src="~/Estilos/js/usuario.js"></script>
 
 <script>
     $(document).ready(function () {
         $('#Tabla').DataTable({
+            lengthMenu: [5, 10, 15, 20],
+
             language: {
-                url: '//cdn.datatables.net/plug-ins/2.0.3/i18n/es-ES.json',
+                lengthMenu: "Mostrar _MENU_ usuarios por página",
+                zeroRecords: "Ningun usuario encontrado",
+                info: "Estás visualizando _START_ a _END_ usuarios de un total de _TOTAL_ usuarios",
+                infoEmpty: "Ningun usuario encontrado",
+                infoFiltered: "(Filtrados desde _MAX_ usuarios totales)",
+                search: "Buscar: ",
+                loadingRecords: "Cargando usuarios..."
             }
         });
     });
