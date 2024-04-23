@@ -158,11 +158,26 @@ namespace InnovaTechWeb.Models
             }
         }
 
-        public Resultado EliminarUsuario(long Id)
+        public Resultado DeshabilitarUsuario(Usuario entidad)
         {
             using (var client = new HttpClient())
             {
-                string url = ConfigurationManager.AppSettings["urlWebApi"] + "Usuario/EliminarUsuario?Id=" + Id;
+                string url = ConfigurationManager.AppSettings["urlWebApi"] + "Usuario/DeshabilitarUsuario";
+                JsonContent jsonEntidad = JsonContent.Create(entidad);
+                var respuesta = client.PutAsync(url, jsonEntidad).Result;
+
+                if (respuesta.IsSuccessStatusCode)
+                    return respuesta.Content.ReadFromJsonAsync<Resultado>().Result;
+                else
+                    return null;
+            }
+        }
+
+        public Resultado EliminarUsuario(long IdUsuario)
+        {
+            using (var client = new HttpClient())
+            {
+                string url = ConfigurationManager.AppSettings["urlWebApi"] + "Usuario/EliminarUsuario?IdUsuario=" + IdUsuario;
                 var respuesta = client.DeleteAsync(url).Result;
 
                 if (respuesta.IsSuccessStatusCode)

@@ -100,6 +100,7 @@ namespace InnovaTechAPI.Controllers
                     {
                         resultado.Codigo = 0;
                         resultado.Detalle = string.Empty;
+                        resultado.Valor = dato.Value;
                     }
                     else
                     {

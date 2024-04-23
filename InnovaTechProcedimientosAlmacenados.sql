@@ -318,12 +318,9 @@ CREATE PROCEDURE ActualizarImagenProducto
 @ImagenProducto	  	  VARCHAR(140)
 AS
 BEGIN
-	IF EXISTS (SELECT 1 FROM Productos WHERE IdProducto = @IdProducto)
-	BEGIN
 		UPDATE Productos
 		SET ImagenProducto = @ImagenProducto
 		WHERE IdProducto = @IdProducto
-	END
 END
 GO
 
@@ -681,12 +678,9 @@ CREATE PROCEDURE ActualizarImagenUsuario
 @ImagenUsuario				VARCHAR(140)
 AS
 BEGIN
-	IF EXISTS (SELECT 1 FROM Usuarios WHERE IdUsuario = @IdUsuario)
-	BEGIN
-		UPDATE Usuarios
-		SET ImagenUsuario = @ImagenUsuario
-		WHERE IdUsuario = @IdUsuario;
-	END
+	UPDATE Usuarios
+	SET ImagenUsuario = @ImagenUsuario
+	WHERE IdUsuario = @IdUsuario;
 END
 GO
 

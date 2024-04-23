@@ -12,7 +12,9 @@ namespace InnovaTechWeb.Controllers
 {
     public class InicioController : Controller
     {
-        UsuarioModel modelo = new UsuarioModel();
+        UsuarioModel usuarioModel = new UsuarioModel();
+        UbicacionModel ubicacionModel = new UbicacionModel();
+        RolModel rolModel = new RolModel();
 
         [HttpGet]
         public ActionResult IniciarSesion()
@@ -23,7 +25,7 @@ namespace InnovaTechWeb.Controllers
         [HttpPost]
         public ActionResult IniciarSesion(Usuario entidad)
         {
-            var resultado = modelo.IniciarSesionUsuario(entidad);            
+            var resultado = usuarioModel.IniciarSesionUsuario(entidad);            
 
             if (resultado.Codigo == 0)
             {
@@ -45,7 +47,8 @@ namespace InnovaTechWeb.Controllers
         [HttpGet]
         public ActionResult RegistrarUsuario()
         {
-            CargarUbicaciones();
+            CargarDistritos();
+            CargarRoles();
 
             return View();
         }
@@ -53,7 +56,7 @@ namespace InnovaTechWeb.Controllers
         [HttpPost]
         public ActionResult RegistrarUsuario(HttpPostedFileBase ImagenUsuario, Usuario entidad)
         {
-            var respuesta = modelo.RegistrarUsuario(entidad);
+            var respuesta = usuarioModel.RegistrarUsuario(entidad);
 
             if (respuesta.Codigo == 0)
             { 
@@ -61,15 +64,16 @@ namespace InnovaTechWeb.Controllers
                 string ruta = AppDomain.CurrentDomain.BaseDirectory + "Imagenes\\" + respuesta.Valor + extension;
                 ImagenUsuario.SaveAs(ruta);
 
-                entidad.IdUsuario = (long)respuesta.Valor;
+                entidad.IdUsuario = respuesta.Valor;
                 entidad.ImagenUsuario = "/Imagenes/" + respuesta.Valor + extension;
 
-                modelo.ActualizarImagenUsuario(entidad);
+                usuarioModel.ActualizarImagenUsuario(entidad);
 
                 return RedirectToAction("IniciarSesion", "Inicio");
             }
             else
-                CargarUbicaciones();
+                CargarDistritos();
+                CargarRoles();
                 ViewBag.MsjPantalla = respuesta.Detalle;
                 return View();
         }
@@ -83,7 +87,7 @@ namespace InnovaTechWeb.Controllers
         [HttpPost]
         public ActionResult RecuperarAccesoUsuario(Usuario entidad)
         {
-            var respuesta = modelo.RecuperarAccesoUsuario(entidad);
+            var respuesta = usuarioModel.RecuperarAccesoUsuario(entidad);
 
             if (respuesta.Codigo == 0)
                 return RedirectToAction("IniciarSesion", "Inicio");
@@ -105,18 +109,28 @@ namespace InnovaTechWeb.Controllers
             return RedirectToAction("IniciarSesion", "Inicio");
         }
 
-        private void CargarUbicaciones()
+        private void CargarRoles()
         {
-            UbicacionModel ubicacion = new UbicacionModel();
+            var respuesta = rolModel.ConsultarRoles(false);
+            var listaRoles = new List<SelectListItem>();
 
-            var respuesta = ubicacion.ConsultarUbicaciones();
-            var ubicaciones = new List<SelectListItem>();
-
-            ubicaciones.Add(new SelectListItem { Text = "Seleccione...", Value = "" });
+            listaRoles.Add(new SelectListItem { Text = "Seleccione...", Value = "" });
             foreach (var item in respuesta.Datos)
-                ubicaciones.Add(new SelectListItem { Text = item.NombreDistrito, Value = item.IdUbicacion.ToString() });
+                listaRoles.Add(new SelectListItem { Text = item.NombreRol, Value = item.IdRol.ToString() });
 
-            ViewBag.Ubicaciones = ubicaciones;
+            ViewBag.ListaRoles = listaRoles;
+        }
+
+        private void CargarDistritos()
+        {
+            var respuesta = ubicacionModel.ConsultarUbicaciones();
+            var listaDistritos = new List<SelectListItem>();
+
+            listaDistritos.Add(new SelectListItem { Text = "Seleccione...", Value = "" });
+            foreach (var item in respuesta.Datos)
+                listaDistritos.Add(new SelectListItem { Text = item.NombreDistrito, Value = item.IdUbicacion.ToString() });
+
+            ViewBag.ListaDistritos = listaDistritos;
         }
     }
 }

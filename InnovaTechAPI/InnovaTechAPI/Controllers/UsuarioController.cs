@@ -145,7 +145,7 @@ namespace InnovaTechAPI.Controllers
                     else
                     {
                         resultado.Codigo = -1;
-                        resultado.Valor = "Su informacion ya se encuentra registrada";
+                        resultado.Detalle = "Su informacion ya se encuentra registrada";
                     }
                 }
             }
@@ -324,7 +324,7 @@ namespace InnovaTechAPI.Controllers
 
             try
             {
-                //Llamar a la base de datos
+
                 using (var db = new InnovaTechDBEntities())
                 {
                     var resp = db.ActualizarImagenProducto(entidad.IdUsuario, entidad.ImagenUsuario);
@@ -334,6 +334,7 @@ namespace InnovaTechAPI.Controllers
                         resultado.Codigo = 0;
                         resultado.Detalle = string.Empty;
                     }
+
                     else
                     {
                         resultado.Codigo = -1;

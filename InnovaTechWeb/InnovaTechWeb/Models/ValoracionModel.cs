@@ -26,10 +26,13 @@ namespace InnovaTechWeb.Models
             }
         }
 
-        public Resultado AgregarValoracion(Valoracion entidad)
+        public Resultado AgregarValoracion(long IdProducto)
         {
             using (var client = new HttpClient())
             {
+                Valoracion entidad = new Valoracion();
+                entidad.IdProducto = IdProducto;
+
                 string url = ConfigurationManager.AppSettings["urlWebApi"] + "Valoracion/AgregarValoracion";
                 JsonContent jsonEntidad = JsonContent.Create(entidad);
                 var respuesta = client.PostAsync(url, jsonEntidad).Result;

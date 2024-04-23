@@ -39,7 +39,7 @@ namespace InnovaTechWeb.Controllers
             else
             {
                 ViewBag.MsjPantalla = respuesta.Detalle;
-                return View(new List<Producto>());
+                return View(new List<Categoria>());
             }
         }
 
@@ -90,7 +90,7 @@ namespace InnovaTechWeb.Controllers
             }
         }
 
-        [HttpGet]
+        [HttpPost]
         public ActionResult DeshabilitarCategoria(Categoria entidad)
         {
             var respuesta = modelo.DeshabilitarCategoria(entidad);

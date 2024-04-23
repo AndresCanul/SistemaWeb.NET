@@ -11,6 +11,6 @@ namespace InnovaTechAPI.Entidades
 
         public string Detalle { get; set; }
 
-        public object Valor { get; set; }
+        public long Valor { get; set; }
     }
 }
